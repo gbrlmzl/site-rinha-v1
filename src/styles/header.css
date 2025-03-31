@@ -1,0 +1,39 @@
+.header__navigation{
+    display: flex;
+    width: 100vw;
+    padding: 1% 2%;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #A9A9A9;
+    /*position: fixed
+    top: 0; 
+    left: 0;
+    z-index: 1000;*/
+    
+}
+.header__logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}
+.header__menu ul{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+
+    
+}
+.header__menu ul li a{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+.header__menu ul li a:hover{
+    color: #1196ad;
+    
+}
+.header__auth{
+    display: flex;
+    gap: 0.9375rem;
+}
