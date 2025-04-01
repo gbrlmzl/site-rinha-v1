@@ -5,6 +5,7 @@ import JogadorInfo from "./JogadorInfo";
 import { inicialEquipe, inicialJogadores } from "./teamData.js";
 
 import "../../styles/CadastroEquipes.css";
+import Pagamento from "./Pagamento";
 function CadastroEquipes() {
   const[currentStep, setCurrentStep] = useState(0);
   const [imagePreview, setImagePreview] = useState("Ideal: PNG 200x200");
@@ -44,68 +45,6 @@ function CadastroEquipes() {
     setCurrentStep((prevStep) => prevStep -1);
   };
 
-  {/*const handleJogadoresDataChange = (step, data) =>{
-    if(step === 0){
-      setFormData((prevData) => ({
-        ...prevData,
-        equipe: {
-          ...prevData.equipe,
-          ...data,
-        },
-      }));
-   }else{
-      {/*setFormData((prevData) => {
-        const newJogadores = [...prevData.jogadores];
-        newJogadores[step - 1] = data;
-        return{ ...prevData, jogadores: newJogadores};
-      });*/}
-           // Atualiza os dados de um jogador específico
-      {/*setFormData((prevData) => {
-      const newJogadores = prevData.jogadores.map((jogador, index) => {
-          if (index === step - 1) {
-              // Atualiza apenas o jogador correspondente
-              return {
-                  ...jogador,
-                  ...data, // Atualiza apenas os campos alterados
-              };
-          }
-          return jogador; // Retorna os outros jogadores inalterados
-      });
-
-      return {
-          ...prevData,
-          jogadores: newJogadores,
-      };
-    });
-    */}
-  
-    {/* Olhar isso */}
-
-
-  {/*const renderStep = () => {
-    switch (currentStep){
-      case 0:
-        return <EquipeInfo formTitle = "Informações da Equipe" data ={equipe} onChange={(data) => handleEquipeDataChange(data)}
-        escudoPreview = {imagePreview} onImageChange = {(file) => handleImagePreviewChange(file)} />;
-      case 1:
-        return<JogadorInfo formTitle = "Jogador 1 (Capitão)" data ={jogadores[0]} onChange = {(data) => handleJogadoresDataChange(data)}/>;
-      case 2:
-        return<JogadorInfo formTitle = "Jogador 2" data ={jogadores[1]} onChange = {(data) => handleJogadoresDataChange(data)}/>;
-      case 3:
-        return<JogadorInfo formTitle = "Jogador 3" data ={jogadores[2]} onChange = {(data) => handleJogadoresDataChange(data)}/>;
-      case 4:
-        return<JogadorInfo formTitle = "Jogador 4" data ={jogadores[3]} onChange = {(data) => handleJogadoresDataChange(data)}/>;
-      case 5:
-        return<JogadorInfo formTitle = "Jogador 5" data ={jogadores[4]} onChange = {(data) => handleJogadoresDataChange(data)}/>;
-      case 6:
-        return<JogadorInfo formTitle = "Jogador 6 (Opcional)" data ={jogadores[5]} onChange = {(data) => handleJogadoresDataChange(6, data)}/>;
-      case 7:
-        return null; {/* Tela de confirmar envio*/}{/*}
-      default:
-        return null;  
-    }
-  }*/}
-
   const renderStep = () => {
     if(currentStep === 0){
       return <EquipeInfo formTitle = "Informações da Equipe" data ={equipe} onChange={(data) => handleEquipeDataChange(data)} escudoPreview = {imagePreview} onImageChange = {(file) => handleImagePreviewChange(file)} />;
@@ -132,7 +71,7 @@ function CadastroEquipes() {
       return <div><p>Posição</p></div>
     }
     else{
-      return <div><button onClick={enviarDadosParaAPI}>Enviar</button></div>
+      return <div><button onClick={enviarDadosParaAPI}>Pagamento</button></div>
     } 
     
       
@@ -148,8 +87,8 @@ function CadastroEquipes() {
 
     try {
         // Faz a requisição POST
-        const response = await fetch("http://localhost:3001/dados", {
-            method: "POST", // Método HTTP
+        const response = await fetch("ENDEREÇO_DA_API_AQUI", {
+            method: "PUT", // Método HTTP
             headers: {
                 "Content-Type": "application/json", // Define o tipo de conteúdo como JSON
             },

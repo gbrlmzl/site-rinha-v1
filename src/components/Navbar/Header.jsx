@@ -9,11 +9,11 @@ function Header() {
                 </div>*/}
                 <div className="header__menu">
                     <ul>
-                        <li><a href="">Início</a></li>
-                        <li><a href="">Inscrições</a></li>
-                        <li><a href="">Jogos</a></li>
+                        <li><a href="/">Início</a></li>
+                        <li><a href="/inscricoes">Inscrições</a></li>
+                        {/*<li><a href="">Jogos</a></li>
                         <li><a href="">Equipes</a></li>
-                        <li><a href="">Edições</a></li>
+                        <li><a href="">Edições</a></li>*/}
                         <li><a href="">Sobre</a></li>
                     </ul>
                 </div>

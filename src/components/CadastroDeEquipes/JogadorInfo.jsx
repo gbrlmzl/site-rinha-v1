@@ -1,5 +1,4 @@
-import { useState } from "react";
-
+"use client"
 function JogadorInfo({formTitle, data, onChange}){
     const handleChange = (e) => {
         const{name, value} = e.target;
