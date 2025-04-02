@@ -10,7 +10,12 @@
     "server": "json-server --watch data/db.json"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@fontsource/roboto": "^5.2.5",
     "@mercadopago/sdk-js": "^0.0.3",
+    "@mui/icons-material": "^7.0.1",
+    "@mui/material": "^7.0.1",
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"

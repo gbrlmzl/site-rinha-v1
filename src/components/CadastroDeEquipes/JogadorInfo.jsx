@@ -1,9 +1,25 @@
 "use client"
-function JogadorInfo({formTitle, data, onChange}){
+import { useState } from "react";
+import { FormControlLabel,Checkbox, TextField, Typography,FormControl, FormGroup, Stack } from "@mui/material";
+import EscolhaPosicao from "./EscolhaPosicao";
+
+
+
+
+function JogadorInfo({formTitle, data, onChange, posicaoIcon, onPosicaoChange }) {
+    
     const handleChange = (e) => {
         const{name, value} = e.target;
         onChange({...data, [name]: value});
     };
+
+    const handlePosicaoChange = (value) => {  
+        handleChange({ target: { name: "posicao", value } });
+        onPosicaoChange(value, posicaoIcon); // Atualiza o estado global com a posição selecionada
+
+    }
+    
+
 
     const handleCheckboxChange = () => {
         const newIsExternalPlayer = !data.isExternalPlayer; // Use o estado global do jogador
@@ -13,51 +29,80 @@ function JogadorInfo({formTitle, data, onChange}){
             matricula: newIsExternalPlayer ? "Jogador Externo" : "", // Define a matrícula como "Jogador Externo" ou limpa o campo
         });
     };
+
+    return (
+        <div>
+            <Typography variant="h4" component="h2" sx={{ fontWeight: "bold", pb: 2, textAlign: "center"}}>
+                {formTitle}
+            </Typography>
+    
+            <Stack spacing={2} p={2} sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                <TextField 
+                    type="text" 
+                    id="player-name" 
+                    name="nome" 
+                    label="Nome" 
+                    value={data.nome} 
+                    onChange={handleChange} 
+                    fullWidth 
+                    variant="outlined"
+                    margin="dense"
+                />
+    
+                <Stack direction="row" spacing={2} alignItems="center">
+                    <TextField 
+                        id="player-matricula" 
+                        name="matricula" 
+                        value={data.matricula} 
+                        onChange={handleChange} 
+                        disabled={data.isExternalPlayer} 
+                        label={data.isExternalPlayer ? "" : "Matrícula"} 
+                        fullWidth
+                        variant="outlined"
+                        margin="dense"
+                        
+                    />
+                    <FormControl component="fieldset">
+                        <FormGroup row>
+                            <FormControlLabel 
+                                control={<Checkbox checked={data.isExternalPlayer} onChange={handleCheckboxChange} />} 
+                                label="Jogador de fora da faculdade" 
+                            />
+                        </FormGroup>
+                    </FormControl>
+                </Stack>
+    
+                <TextField 
+                    type="text" 
+                    id="player-nickname" 
+                    label="Nickname + #" 
+                    variant="outlined" 
+                    value={data.nickname} 
+                    onChange={handleChange} 
+                    fullWidth
+                    margin="dense"
+                />
+    
+                <TextField 
+                    id="player-discord" 
+                    name="discordUser" 
+                    value={data.discordUser} 
+                    label="Usuário no Discord" 
+                    onChange={handleChange} 
+                    fullWidth
+                    variant="outlined" 
+                    margin="dense"
+                />
+    
+                <EscolhaPosicao onChange={handlePosicaoChange} defaultIcon={posicaoIcon}/>
+            </Stack>
+        </div>
+    );
+
+    
     
 
-    return(
-        <div>
-            <div className="form__title font-serif font-bold text-3xl pb-2">
-                <h2>{formTitle}</h2>
-            </div>
-            <div className="form__box">
-                <div className="form__input">
-                    <input type="text" id="player-name" name="nome" value={data.nome} onChange={handleChange} placeholder="Nome" />
-                </div>
-                <div className="form__input">
-                    <input type="text" className="matricula__input" id="player-matricula" name="matricula" 
-                    value={data.matricula} 
-                    onChange={handleChange} 
-                    disabled={data.isExternalPlayer} 
-                    placeholder={data.isExternalPlayer? "Jogador Externo" : "Matrícula"} />
-                    <label>
-                        <input type="checkbox" checked={data.isExternalPlayer} onChange={handleCheckboxChange} />
-                            Sou um jogador de fora da faculdade
-                    </label>
-                </div>
-                <div className="form__input">
-                    <input type="text" id="player-nickname" name="nickname" value={data.nickname} onChange={handleChange} placeholder="Nickname + #" />
-                </div>
-                <div className="form__input">
-                    <input type="text" id="player-discord" name="discordUser" value={data.discordUser} onChange={handleChange} placeholder="Usuário no Discord" />
-                </div>
-                <div className="form__input">
-                    <select id="player-position" name="posicao" value={data.posicao} onChange={handleChange}>
-                        <option value="">Selecione a posição</option>
-                        <option value="Top">Top</option>
-                        <option value="Caçador">Caçador</option>
-                        <option value="Meio">Meio</option>
-                        <option value="Atirador">Atirador</option>
-                        <option value="Suporte">Suporte</option>
-                    </select>
-                </div>    
-
-                
-                
-            </div>
-        </div>
-        
-    );
+    
 }
 
 export default JogadorInfo

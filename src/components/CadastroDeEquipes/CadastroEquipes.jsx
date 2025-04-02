@@ -4,11 +4,28 @@ import EquipeInfo from "./EquipeInfo";
 import JogadorInfo from "./JogadorInfo";
 import { inicialEquipe, inicialJogadores } from "./teamData.js";
 
+
+import TopIcon from "../../assets/icons/Position-Top.png";
+import JungleIcon from "../../assets/icons/Position-Jungle.png";
+import MidIcon from "../../assets/icons/Position-Mid.png";
+import ADCIcon from "../../assets/icons/Position-Bot.png";
+import SupportIcon from "../../assets/icons/Position-Support.png";
+import DefaultIconPosition from "../../assets/icons/DefaultIcon.svg";
+
 import "../../styles/CadastroEquipes.css";
-import Pagamento from "./Pagamento";
+import { Button } from "@mui/material";
 function CadastroEquipes() {
   const[currentStep, setCurrentStep] = useState(0);
   const [imagePreview, setImagePreview] = useState("Ideal: PNG 200x200");
+  const [defaultPosicaoIcon, setDefaultPosicaoIcon] = useState([
+    DefaultIconPosition, // Jogador 1
+    DefaultIconPosition, // Jogador 2
+    DefaultIconPosition, // Jogador 3
+    DefaultIconPosition, // Jogador 4
+    DefaultIconPosition, // Jogador 5
+    DefaultIconPosition, // Jogador 6 (opcional)
+  ]);
+ 
   const [equipe, setEquipe] = useState(inicialEquipe);
   const [jogadores, setJogadores] = useState(inicialJogadores);
 
@@ -28,6 +45,27 @@ function CadastroEquipes() {
       reader.readAsDataURL(file);
     }
   } 
+  const handlePosicaoIconChange = (value, jogadorIndex) => {
+    const posicoesMap = {
+      "Top": TopIcon,
+      "Selva": JungleIcon,
+      "Meio": MidIcon,
+      "Atirador": ADCIcon,
+      "Suporte": SupportIcon
+    };
+
+    if (posicoesMap[value]) {
+      setDefaultPosicaoIcon((prevIcons) => {
+        const newIcons = [...prevIcons];
+        newIcons[jogadorIndex] = posicoesMap[value]; // Atualiza o ícone do jogador específico
+        return newIcons;
+      });
+    } else {
+      console.warn(`Posição inválida: ${value}`);
+    }
+  };
+
+  
   const handleJogadoresDataChange = (data) => {
     setJogadores((prevData) => {
       const newJogadores = [...prevData];
@@ -49,12 +87,12 @@ function CadastroEquipes() {
     if(currentStep === 0){
       return <EquipeInfo formTitle = "Informações da Equipe" data ={equipe} onChange={(data) => handleEquipeDataChange(data)} escudoPreview = {imagePreview} onImageChange = {(file) => handleImagePreviewChange(file)} />;
     }else if(currentStep === 1){
-      return <JogadorInfo formTitle = {`Jogador ${currentStep} (Capitão)`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)}/>;
+      return <JogadorInfo formTitle = {`Jogador ${currentStep} (Capitão)`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)} posicaoIcon={defaultPosicaoIcon[currentStep - 1]} onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)} />;
     }else if(currentStep > 1 && currentStep < 6){
-      return <JogadorInfo formTitle = {`Jogador ${currentStep}`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)}/>;
+      return <JogadorInfo formTitle = {`Jogador ${currentStep}`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)} posicaoIcon={defaultPosicaoIcon[currentStep - 1]} onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}/>;
     }
     else if(currentStep === 6){
-      return <JogadorInfo formTitle = {`Jogador ${currentStep} (Opcional)`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)}/>;
+      return <JogadorInfo formTitle = {`Jogador ${currentStep} (Opcional)`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)} posicaoIcon={defaultPosicaoIcon[currentStep - 1]} onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}/>;
     }
     else{
       return;
@@ -68,7 +106,7 @@ function CadastroEquipes() {
       return <div><p></p></div>
     }
     else if(currentStep > 0 && currentStep < 7){
-      return <div><p>Posição</p></div>
+      return <div></div>
     }
     else{
       return <div><button onClick={enviarDadosParaAPI}>Pagamento</button></div>
@@ -120,7 +158,7 @@ function CadastroEquipes() {
             <div className="submit-screen__navigation flex flex-row gap-11">
                   <div className="submit-screen__navigation-button">
                       {currentStep > 0 && (
-                          <button onClick={handlePrevious}>Anterior</button>
+                          <Button variant="contained" color= "primary" onClick={handlePrevious}>Anterior</Button>
                       )}       
                   </div>
                   <div>{renderNavbarStep()}
@@ -128,7 +166,7 @@ function CadastroEquipes() {
                   </div>
                   <div className="submit-screen__navigation-button">
                       {currentStep < 7 && (
-                          <button onClick={handleNext}>Próximo</button>
+                          <Button variant="contained" color="secondary" onClick={handleNext}>Próximo</Button>
                         )}
                   </div>
             </div>
