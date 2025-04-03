@@ -1,183 +1,113 @@
-"use client"
-import { useState } from "react";
+"use client";
+import { Box, Button, Container, Paper, Stepper, Step, StepLabel, Typography, Snackbar } from "@mui/material";
 import EquipeInfo from "./EquipeInfo";
 import JogadorInfo from "./JogadorInfo";
-import { inicialEquipe, inicialJogadores } from "./teamData.js";
+import { useCadastroEquipe } from "./useCadastroEquipe";
+import { useState } from "react";
 
+const steps = ["Informações da Equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)"];
 
-import TopIcon from "../../assets/icons/Position-Top.png";
-import JungleIcon from "../../assets/icons/Position-Jungle.png";
-import MidIcon from "../../assets/icons/Position-Mid.png";
-import ADCIcon from "../../assets/icons/Position-Bot.png";
-import SupportIcon from "../../assets/icons/Position-Support.png";
-import DefaultIconPosition from "../../assets/icons/DefaultIcon.svg";
-
-import "../../styles/CadastroEquipes.css";
-import { Button } from "@mui/material";
 function CadastroEquipes() {
-  const[currentStep, setCurrentStep] = useState(0);
-  const [imagePreview, setImagePreview] = useState("Ideal: PNG 200x200");
-  const [defaultPosicaoIcon, setDefaultPosicaoIcon] = useState([
-    DefaultIconPosition, // Jogador 1
-    DefaultIconPosition, // Jogador 2
-    DefaultIconPosition, // Jogador 3
-    DefaultIconPosition, // Jogador 4
-    DefaultIconPosition, // Jogador 5
-    DefaultIconPosition, // Jogador 6 (opcional)
-  ]);
- 
-  const [equipe, setEquipe] = useState(inicialEquipe);
-  const [jogadores, setJogadores] = useState(inicialJogadores);
-
-
-  const handleEquipeDataChange = (data) => {
-    setEquipe((prevData) => ({
-      ...prevData,
-      ...data,
-    }));   
-  }
-  const handleImagePreviewChange = (file) => {
-    const reader = new FileReader();
-    if (file) {
-      reader.onloadend = () => {
-        setImagePreview(<img src={reader.result} alt="Escudo da equipe" />);
-      };
-      reader.readAsDataURL(file);
-    }
-  } 
-  const handlePosicaoIconChange = (value, jogadorIndex) => {
-    const posicoesMap = {
-      "Top": TopIcon,
-      "Selva": JungleIcon,
-      "Meio": MidIcon,
-      "Atirador": ADCIcon,
-      "Suporte": SupportIcon
-    };
-
-    if (posicoesMap[value]) {
-      setDefaultPosicaoIcon((prevIcons) => {
-        const newIcons = [...prevIcons];
-        newIcons[jogadorIndex] = posicoesMap[value]; // Atualiza o ícone do jogador específico
-        return newIcons;
-      });
-    } else {
-      console.warn(`Posição inválida: ${value}`);
-    }
-  };
-
+  const {
+    currentStep,
+    setCurrentStep,
+    imagePreview,
+    defaultPosicaoIcon,
+    equipe,
+    jogadores,
+    handleEquipeDataChange,
+    handleJogadoresDataChange,
+    handleImagePreviewChange,
+    handlePosicaoIconChange,
+  } = useCadastroEquipe();
   
-  const handleJogadoresDataChange = (data) => {
-    setJogadores((prevData) => {
-      const newJogadores = [...prevData];
-      newJogadores[data.id] = data;
-      return newJogadores;
-    });
-  }
 
-  
-  const handleNext = () => {
-    setCurrentStep((prevStep) => prevStep + 1);
-  };
-  
-  const handlePrevious = () => {
-    setCurrentStep((prevStep) => prevStep -1);
-  };
+  const handleNext = () => setCurrentStep((prev) => prev + 1);
+  const handlePrevious = () => setCurrentStep((prev) => prev - 1);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
-  const renderStep = () => {
-    if(currentStep === 0){
-      return <EquipeInfo formTitle = "Informações da Equipe" data ={equipe} onChange={(data) => handleEquipeDataChange(data)} escudoPreview = {imagePreview} onImageChange = {(file) => handleImagePreviewChange(file)} />;
-    }else if(currentStep === 1){
-      return <JogadorInfo formTitle = {`Jogador ${currentStep} (Capitão)`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)} posicaoIcon={defaultPosicaoIcon[currentStep - 1]} onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)} />;
-    }else if(currentStep > 1 && currentStep < 6){
-      return <JogadorInfo formTitle = {`Jogador ${currentStep}`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)} posicaoIcon={defaultPosicaoIcon[currentStep - 1]} onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}/>;
-    }
-    else if(currentStep === 6){
-      return <JogadorInfo formTitle = {`Jogador ${currentStep} (Opcional)`} data ={jogadores[currentStep - 1]} onChange={(data) => handleJogadoresDataChange(data)} posicaoIcon={defaultPosicaoIcon[currentStep - 1]} onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}/>;
-    }
-    else{
-      return;
-    }
-  }
-    
-      
-  
-  const renderNavbarStep = ()  => {
-    if(currentStep === 0){
-      return <div><p></p></div>
-    }
-    else if(currentStep > 0 && currentStep < 7){
-      return <div></div>
-    }
-    else{
-      return <div><button onClick={enviarDadosParaAPI}>Pagamento</button></div>
-    } 
-    
-      
-  }
-  
-  
   const enviarDadosParaAPI = async () => {
-    // Dados que serão enviados
-    const dados = {
-        equipe: equipe, // Objeto da equipe
-        jogadores: jogadores, // Array de jogadores
-    };
-
     try {
-        // Faz a requisição POST
-        const response = await fetch("ENDEREÇO_DA_API_AQUI", {
-            method: "PUT", // Método HTTP
-            headers: {
-                "Content-Type": "application/json", // Define o tipo de conteúdo como JSON
-            },
-            body: JSON.stringify(dados), // Converte o objeto para JSON
-        });
+      const response = await fetch("ENDEREÇO_DA_API_AQUI", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ equipe, jogadores }),
+      });
 
-        // Verifica se a requisição foi bem-sucedida
-        if (response.ok) {
-            const respostaJson = await response.json(); // Converte a resposta para JSON
-            console.log("Dados enviados com sucesso:", respostaJson);
-        } else {
-            console.error("Erro ao enviar os dados:", response.status, response.statusText);
-        }
+      if (response.ok) {
+        setSnackbarOpen(true);
+      } else {
+        console.error("Erro ao enviar:", response.statusText);
+      }
     } catch (error) {
-        console.error("Erro na requisição:", error);
+      console.error("Erro:", error);
     }
-};
+  };
 
-  
-  
-  
   return (
-        <div className="main-content">
-            <div className="titulo">
-              <h1>Cadastro de equipe</h1>
-            </div>
-            <div className="submit-screen">
-              {renderStep()}
-            <div className="submit-screen__navigation flex flex-row gap-11">
-                  <div className="submit-screen__navigation-button">
-                      {currentStep > 0 && (
-                          <Button variant="contained" color= "primary" onClick={handlePrevious}>Anterior</Button>
-                      )}       
-                  </div>
-                  <div>{renderNavbarStep()}
+    <Container maxWidth="md">
+      <Paper elevation={3} sx={{ p: 4, mt: 3 }}>
+        <Typography variant="h4" gutterBottom align="center">
+          Cadastro de Equipe
+        </Typography>
 
-                  </div>
-                  <div className="submit-screen__navigation-button">
-                      {currentStep < 7 && (
-                          <Button variant="contained" color="secondary" onClick={handleNext}>Próximo</Button>
-                        )}
-                  </div>
-            </div>
+        {/* Stepper para indicar progresso */}
+        <Stepper activeStep={currentStep} alternativeLabel>
+          {steps.map((label, index) => (
+            <Step key={index}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
 
-              
-            
-            </div>
-            
-        </div>
+        {/* Conteúdo do formulário */}
+        <Box sx={{ my: 4 }}>
+          {currentStep === 0 ? (
+            <EquipeInfo
+              formTitle="Informações da Equipe"
+              data={equipe}
+              onChange={handleEquipeDataChange}
+              escudoPreview={imagePreview}
+              onImageChange={handleImagePreviewChange}
+            />
+          ) : (
+            <JogadorInfo
+              formTitle={steps[currentStep]}
+              data={jogadores[currentStep - 1]}
+              onChange={handleJogadoresDataChange}
+              posicaoIcon={defaultPosicaoIcon[currentStep - 1]}
+              onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}
+            />
+          )}
+        </Box>
+
+        {/* Botões de navegação */}
+        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
+          <Button variant="contained" color="secondary" disabled={currentStep === 0} onClick={handlePrevious}>
+            Anterior
+          </Button>
+
+          {currentStep < steps.length - 1 ? (
+            <Button variant="contained" color="primary" onClick={handleNext}>
+              Próximo
+            </Button>
+          ) : (
+            <Button variant="contained" color="success" onClick={enviarDadosParaAPI}>
+              Pagamento
+            </Button>
+          )}
+        </Box>
+      </Paper>
+
+      {/* Snackbar para feedback */}
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarOpen(false)}
+        message="Cadastro realizado com sucesso!"
+      />
+    </Container>
   );
 }
-
 
 export default CadastroEquipes;

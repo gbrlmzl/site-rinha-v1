@@ -40,16 +40,16 @@ function JogadorInfo({formTitle, data, onChange, posicaoIcon, onPosicaoChange })
                 <TextField 
                     type="text" 
                     id="player-name" 
-                    name="nome" 
+                    name="nomeJogador" 
                     label="Nome" 
-                    value={data.nome} 
+                    value={data.nomeJogador} 
                     onChange={handleChange} 
                     fullWidth 
                     variant="outlined"
                     margin="dense"
                 />
     
-                <Stack direction="row" spacing={2} alignItems="center">
+                <Stack display={"flex"}  direction="row" spacing={2}  justifyItems="space-between" alignItems="center">
                     <TextField 
                         id="player-matricula" 
                         name="matricula" 
@@ -67,6 +67,7 @@ function JogadorInfo({formTitle, data, onChange, posicaoIcon, onPosicaoChange })
                             <FormControlLabel 
                                 control={<Checkbox checked={data.isExternalPlayer} onChange={handleCheckboxChange} />} 
                                 label="Jogador de fora da faculdade" 
+
                             />
                         </FormGroup>
                     </FormControl>
@@ -94,7 +95,7 @@ function JogadorInfo({formTitle, data, onChange, posicaoIcon, onPosicaoChange })
                     margin="dense"
                 />
     
-                <EscolhaPosicao onChange={handlePosicaoChange} defaultIcon={posicaoIcon}/>
+                <EscolhaPosicao defaultIcon={posicaoIcon} onChange={handlePosicaoChange} />
             </Stack>
         </div>
     );

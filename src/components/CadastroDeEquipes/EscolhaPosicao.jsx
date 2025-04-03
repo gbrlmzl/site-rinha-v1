@@ -6,8 +6,7 @@ import JungleIcon from "../../assets/icons/Position-Jungle.png";
 import MidIcon from "../../assets/icons/Position-Mid.png";
 import ADCIcon from "../../assets/icons/Position-Bot.png";
 import SupportIcon from "../../assets/icons/Position-Support.png";
-import ControlCameraIcon from "@mui/icons-material/ControlCamera"; // Ícone padrão para abrir o menu
-import Grow from "@mui/material/Grow";
+
 
 function EscolhaPosicao({onChange, defaultIcon}) {
   const [anchorEl, setAnchorEl] = useState(null);
