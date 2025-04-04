@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, MenuItem, Backdrop, IconButton } from "@mui/material";
+import { Menu, MenuItem, Backdrop, IconButton, Stack } from "@mui/material";
 import Image from "next/image"; // Importando o componente Image
 import TopIcon from "../../assets/icons/Position-Top.png";
 import JungleIcon from "../../assets/icons/Position-Jungle.png";
@@ -69,22 +69,23 @@ function EscolhaPosicao({onChange, defaultIcon}) {
         anchorOrigin={{
           vertical: "top",
           horizontal: "center",
-        }}
+          
+          }}
         transformOrigin={{
           vertical: "bottom",
           horizontal: "center",
+         
         }}
         
         slotProps={{
             paper: {
               sx: {
-                display: "flex", // Torna o contêiner flexível
-                
-                flexDirection: "row", // Alinha os itens em linha
                 gap: 1, // Espaçamento entre os itens
-                padding: 1, // Espaçamento interno do menu
-                backgroundColor: "#FFFFFF", // Cor de fundo personalizada
+                // Espaçamento interno do menu
+                //backgroundColor: "#000000",//"#0A96AA", // Cor de fundo personalizada
+                backgroundImage: "linear-gradient(to bottom, #0A96AA, #000000)", // Gradiente de fundo
                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)", // Sombra para destaque
+                borderRadius: "8px", // Bordas arredondadas
                 
               },
               
@@ -99,21 +100,25 @@ function EscolhaPosicao({onChange, defaultIcon}) {
       >
         
 
-        <MenuItem onClick={() => handleSelectPosicao("Top")}>
-          <Image src={TopIcon} alt="Top" width={40} height={40} /> {/* Ícone para Top */}
-        </MenuItem>
-        <MenuItem onClick={() => handleSelectPosicao("Selva")} >
-          <Image src={JungleIcon} alt="Selva" width={40} height={40} /> {/* Ícone para Selva */}
-        </MenuItem>
-        <MenuItem onClick={() => handleSelectPosicao("Meio")}>
-          <Image src={MidIcon} alt="Meio" width={40} height={40} /> {/* Ícone para Meio */}
-        </MenuItem>
-        <MenuItem onClick={() => handleSelectPosicao("Atirador")}>
-          <Image src={ADCIcon} alt="Atirador" width={40} height={40} /> {/* Ícone para Atirador */}
-        </MenuItem>
-        <MenuItem onClick={() => handleSelectPosicao("Suporte")}>
-          <Image src={SupportIcon} alt="Suporte" width={40} height={40} /> {/* Ícone para Suporte */}
-        </MenuItem>
+        <Stack sx={{ display: "flex", flexDirection: "row", gap: 1 }}>
+            <MenuItem onClick={() => handleSelectPosicao("Top")} >
+            <Image src={TopIcon} alt="Top" width={40} height={40} /> {/* Ícone para Top */}
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectPosicao("Selva")} >
+            <Image src={JungleIcon} alt="Selva" width={40} height={40} /> {/* Ícone para Selva */}
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectPosicao("Meio")} >
+            <Image src={MidIcon} alt="Meio" width={40} height={40} /> {/* Ícone para Meio */}
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectPosicao("Atirador")}>
+            <Image src={ADCIcon} alt="Atirador" width={40} height={40} /> {/* Ícone para Atirador */}
+            </MenuItem>
+            <MenuItem onClick={() => handleSelectPosicao("Suporte")} >
+            <Image src={SupportIcon} alt="Suporte" width={40} height={40} /> {/* Ícone para Suporte */}
+            </MenuItem>
+        </Stack>
+        
+        
       </Menu>
 
 
