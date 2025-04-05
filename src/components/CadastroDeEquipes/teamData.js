@@ -9,7 +9,9 @@ export const inicialJogadores = [
         "nickname" : "",
         "discordUser" : "",
         "posicao" : "",
-        "isExternalPlayer" : false
+        "isExternalPlayer" : false,
+        "disabledPlayer" : false,
+        
 },
     {
         "nomeJogador" : "",
@@ -17,7 +19,8 @@ export const inicialJogadores = [
         "nickname" : "",
         "discordUser" : "",
         "posicao" : "",
-        "isExternalPlayer" : false
+        "isExternalPlayer" : false,
+        "disabledPlayer" : false,
 },
 {
         "nomeJogador" : "",
@@ -25,7 +28,8 @@ export const inicialJogadores = [
         "nickname" : "",
         "discordUser" : "",
         "posicao" : "",
-        "isExternalPlayer" : false
+        "isExternalPlayer" : false,
+        "disabledPlayer" : false,
 },
 {
         "nomeJogador" : "",
@@ -33,7 +37,8 @@ export const inicialJogadores = [
         "nickname" : "",
         "discordUser" : "",
         "posicao" : "",
-        "isExternalPlayer" : false
+        "isExternalPlayer" : false,
+        "disabledPlayer" : false,
 },
 {
         "nomeJogador" : "",
@@ -41,7 +46,8 @@ export const inicialJogadores = [
         "nickname" : "",
         "discordUser" : "",
         "posicao" : "",
-        "isExternalPlayer" : false
+        "isExternalPlayer" : false,
+        "disabledPlayer" : false,
 },
 {
         "nomeJogador" : "",
@@ -49,7 +55,8 @@ export const inicialJogadores = [
         "nickname" : "",
         "discordUser" : "",
         "posicao" : "",
-        "isExternalPlayer" : false
+        "isExternalPlayer" : false,
+        "disabledPlayer" : false,
 }							
  ];
 

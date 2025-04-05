@@ -1,5 +1,5 @@
 //import { Geist, Geist_Mono } from "next/font/google";
-//import "./reset.css";
+import "./reset.css";
 import "./globals.css";
 
 
@@ -26,7 +26,6 @@ export default function RootLayout({ children }) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </head>
       <body>
-        
         {children}
       </body>
     </html>

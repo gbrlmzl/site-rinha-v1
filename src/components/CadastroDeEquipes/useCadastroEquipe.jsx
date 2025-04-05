@@ -19,10 +19,10 @@ export const useCadastroEquipe = () => {
     setEquipe((prev) => ({ ...prev, ...data }));
   };
 
-  const handleJogadoresDataChange = (data) => {
+  const handleJogadoresDataChange = (data,index) => {
     setJogadores((prev) => {
       const newJogadores = [...prev];
-      newJogadores[data.id] = data;
+      newJogadores[index] = data;
       return newJogadores;
     });
   };
@@ -37,7 +37,7 @@ export const useCadastroEquipe = () => {
   };
 
   const handlePosicaoIconChange = (value, jogadorIndex) => {
-    const posicoesMap = { Top: TopIcon, Selva: JungleIcon, Meio: MidIcon, Atirador: ADCIcon, Suporte: SupportIcon };
+    const posicoesMap = { Top: TopIcon, Selva: JungleIcon, Meio: MidIcon, Atirador: ADCIcon, Suporte: SupportIcon, Default: DefaultIconPosition };
     if (posicoesMap[value]) {
       setDefaultPosicaoIcon((prevIcons) => {
         const newIcons = [...prevIcons];

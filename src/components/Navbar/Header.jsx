@@ -16,7 +16,10 @@ import rinhaLogo from '../../assets/imgs/rinhaLogo.svg';
 import AdbIcon from '@mui/icons-material/Adb';
 import Image from 'next/image';
 import rinhaLogoTitulo from '../../assets/imgs/rinhaLogoTitulo.svg';
-import { color } from '@mui/system';
+import { color, gap } from '@mui/system';
+import { blue } from '@mui/material/colors';
+import Link from 'next/link';
+import Inscricoes from '@/app/inscricoes/page';
 
 
 const pages = ['Início'];
@@ -42,11 +45,11 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor: "#0E1241", color: "#F9FFD6"}}>
+    <AppBar position="static" sx={{backgroundColor: "#0E1241"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/*<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}
-          <IconButton  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
+          <IconButton  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}> {/* Desativar sombreamento de clique e colocar um Onclick*/}
                 <Image src={rinhaLogo} alt="" width={40} height={40} />
           </IconButton>
           {/*<Typography
@@ -95,8 +98,8 @@ function ResponsiveAppBar() {
               sx={{ display: { xs: 'block', md: 'none' }  }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} >
-                  <Typography sx={{ textAlign: 'center'}}>{page}</Typography>
+                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{backgroundColor:"blue"}} > {/*Define propriedades do menu para telas menores*/}
+                  <Typography sx={{ textAlign: 'center'}} fontFamily={"Archivo-Black"} color='#FF0A0A'>{page}</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                 </MenuItem>
               ))}
             </Menu>
@@ -125,16 +128,23 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>*/}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' },  }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2  }}>{/*Define propriedades do menu para telas maiores*/}
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{my: 2, color: 'white', display: 'block', gap: 2, fontFamily: 'Archivo-Black', fontSize: 20,   padding: 1, "&:hover": {color: "#FF0A0A"}}} /*Define propriedades do texto do menu para telas maiores*/
+                >
+                  {page}
+                </Button>
             ))}
+            <Link href="inscricoes" style={{ textDecoration: 'none'}}>
+              <Button
+                sx={{my: 2, color: 'white',  fontFamily: 'Archivo-Black', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
+              >
+                Inscrição
+              </Button>
+            </Link>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

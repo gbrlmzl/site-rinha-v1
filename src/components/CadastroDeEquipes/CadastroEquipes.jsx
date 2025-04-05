@@ -2,13 +2,14 @@
 import { Box, Button, Container, Paper, Stepper, Step, StepLabel, Typography, Snackbar } from "@mui/material";
 import EquipeInfo from "./EquipeInfo";
 import JogadorInfo from "./JogadorInfo";
+import ConfirmacaoDadosEquipe from "./ConfirmacaoDadosEquipe";
 import { useCadastroEquipe } from "./useCadastroEquipe";
 import { useState } from "react";
-import { maxWidth } from "@mui/system";
 import { useRef } from "react";
 import Pagamento from "./Pagamento";
 
-const steps = ["Informações da Equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)", "Pagamento"];
+const steps = ["Informações da Equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)", "Confirmação","Pagamento"];
+
 
 function CadastroEquipes() {
   const {
@@ -23,13 +24,18 @@ function CadastroEquipes() {
     handleImagePreviewChange,
     handlePosicaoIconChange,
   } = useCadastroEquipe();
-  
+
+  const jogadorTemporario = useRef(jogadores[currentStep - 1]);
   const stepperRef = useRef(null); // Referência para o contêiner do Stepper
+  
 
  
   //const handleNext = () => setCurrentStep((prev) => prev + 1);
 
   const handleNext = () => {
+    if(currentStep >= 1 && currentStep <= 6){
+      handleJogadoresDataChange(jogadorTemporario.current, currentStep - 1);
+    }
     setCurrentStep((prev) => {
       const nextStep = prev + 1;
       scrollToStep(nextStep); // Rola para o próximo passo
@@ -59,7 +65,7 @@ function CadastroEquipes() {
 
   const enviarDadosParaAPI = async () => {
     try {
-      const response = await fetch("ENDEREÇO_DA_API_AQUI", {
+      const response = await fetch("", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ equipe, jogadores }),
@@ -76,11 +82,13 @@ function CadastroEquipes() {
   };
 
   return (
-    <Container maxWidth="md">
-      <Paper elevation={3} sx={{ p: 4, mt: 3 }}>
-        <Typography variant="h4" gutterBottom align="center">
+    <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", minHeight: "100vh", /*paddingTop: {xs: 0, md: 3, },*/ backgroundColor: "#f5f5f5" }}>
+      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color: "#333" }}>
           Cadastro de Equipe
-        </Typography>
+      </Typography>
+      <Container maxWidth="md">
+      <Paper elevation={3} sx={{ p: 4, backgroundColor: "#D8D5D5"}} >
+        
 
         {/* Stepper para indicar progresso */}
         <Box ref={stepperRef}  sx={{ overflowX: "auto", maxWidth: "100%" }}>
@@ -109,11 +117,14 @@ function CadastroEquipes() {
             <JogadorInfo
               formTitle={steps[currentStep]}
               data={jogadores[currentStep - 1]}
-              onChange={handleJogadoresDataChange}
+              onSave={(value) => jogadorTemporario.current = value}
               posicaoIcon={defaultPosicaoIcon[currentStep - 1]}
               onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}
+              stepAtual={currentStep}
             />
-          ) :(
+          ) : currentStep === 7 ?(
+            <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview}/>
+          ):(
             <Pagamento valor={20}/>
           )}
         </Box>
@@ -125,7 +136,7 @@ function CadastroEquipes() {
           </Button>
 
           {currentStep < steps.length - 1 ? (
-            <Button variant="contained" color="primary" onClick={handleNext}>
+            <Button variant="contained" color="primary" /* Configurar um disabled aqui*/onClick={handleNext}>
               Próximo
             </Button>
           ) : (
@@ -144,6 +155,8 @@ function CadastroEquipes() {
         message="Cadastro realizado com sucesso!"
       />
     </Container>
+    </Box>
+    
   );
 }
 

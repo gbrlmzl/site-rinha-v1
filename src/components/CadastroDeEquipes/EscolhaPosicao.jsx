@@ -49,7 +49,8 @@ function EscolhaPosicao({onChange, defaultIcon}) {
         "&:hover": {
           backgroundColor: "#e0e0e0", // Cor de fundo ao passar o mouse
         },
-      }}>
+      }}
+       >
       
       
     <Image src={defaultIcon} alt="Selecionar posição" width={60} height={60}  />

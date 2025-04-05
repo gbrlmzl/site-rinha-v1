@@ -1,4 +1,3 @@
-import Image from "next/image";
 import CadastroEquipes from '../../components/CadastroDeEquipes/CadastroEquipes';
 import Header from '../../components/Navbar/Header'; 
 
