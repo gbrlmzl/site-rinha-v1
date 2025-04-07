@@ -122,7 +122,6 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                             variant="outlined"
                             margin="dense"
                             required={!localData.isExternalPlayer && !localData.disabledPlayer} // Torna o campo obrigatório se o jogador não for desabilitado e não for externo
-                            type= "number" // Define o tipo do input como número
                             />
                         </Box>
                         <FormControl component="fieldset" sx={{marginLeft: {xs: 0, md: 2}}}>

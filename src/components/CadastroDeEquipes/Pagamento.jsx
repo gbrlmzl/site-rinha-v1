@@ -58,53 +58,55 @@ const Pagamento = ({ valor }) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, margin: "0 auto", p: 2 }}>
-      <Typography variant="h5" mb={2}>
-        Informações para pagamento via PIX
+    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, margin: "0 auto", p: 3 }}>
+      <Typography variant="h6" mb={2}>
+        Dados para o pagamento
       </Typography>
+      
+      <Box >
+        <TextField
+          fullWidth
+          label="Nome"
+          name="nome"
+          value={form.nome}
+          onChange={handleChange}
+          required
+        />
 
-      <TextField
-        fullWidth
-        label="Nome"
-        name="nome"
-        value={form.nome}
-        onChange={handleChange}
-        margin="normal"
-        required
-      />
+        <TextField
+          fullWidth
+          label="Sobrenome"
+          name="sobrenome"
+          value={form.sobrenome}
+          onChange={handleChange}
+          required
+        />
 
-      <TextField
-        fullWidth
-        label="Sobrenome"
-        name="sobrenome"
-        value={form.sobrenome}
-        onChange={handleChange}
-        margin="normal"
-        required
-      />
+        <TextField
+          fullWidth
+          label="E-mail"
+          name="email"
+          type="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+        />
 
-      <TextField
-        fullWidth
-        label="E-mail"
-        name="email"
-        type="email"
-        value={form.email}
-        onChange={handleChange}
-        margin="normal"
-        required
-      />
+        <TextField
+          fullWidth
+          label="CPF (Apenas números)"
+          name="cpf"
+          value={form.cpf}
+          onChange={handleChange}
+          required
+          
+        />
 
-      <TextField
-        fullWidth
-        label="CPF"
-        name="cpf"
-        value={form.cpf}
-        onChange={handleChange}
-        margin="normal"
-        required
-      />
+        <input type="hidden" name="valor" value={valor} />
 
-      <input type="hidden" name="valor" value={valor} />
+      </Box>
+
+     
 
       <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled={loading}>
         {loading ? <CircularProgress size={24} color="inherit" /> : "Gerar QR Code PIX"}
@@ -117,6 +119,7 @@ const Pagamento = ({ valor }) => {
           </Typography>
           <img src={qrCode} alt="QR Code PIX" style={{ width: 250, height: 250 }} />
         </Box>
+        
       )}
     </Box>
   );

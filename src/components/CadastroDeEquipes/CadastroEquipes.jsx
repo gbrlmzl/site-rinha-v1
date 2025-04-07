@@ -7,7 +7,7 @@ import { useCadastroEquipe } from "./useCadastroEquipe";
 import { useState } from "react";
 import { useRef } from "react";
 import Pagamento from "./Pagamento";
-import Cadastro2 from "./Cadastro2";
+
 
 const steps = ["Informações da equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)", "Confirmação","Pagamento"];
 
@@ -149,7 +149,7 @@ function CadastroEquipes() {
               stepAtual={currentStep}
             />
           ) : currentStep === 7 ?(
-            <Cadastro2 dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview}/>
+            <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview}/>
           ):(
             <Pagamento valor={20/* função para calcular valor com base no número de players*/} /*onSubmit={}*//>
           )}
