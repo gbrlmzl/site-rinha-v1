@@ -14,6 +14,16 @@ export const useCadastroEquipe = () => {
   const [defaultPosicaoIcon, setDefaultPosicaoIcon] = useState(Array(6).fill(DefaultIconPosition));
   const [equipe, setEquipe] = useState(inicialEquipe);
   const [jogadores, setJogadores] = useState(inicialJogadores);
+  const [validationEquipe, setValidationEquipe] = useState(false);
+  
+ 
+  
+
+  const handleEquipeValidation = (value) => {
+    setValidationEquipe(value);
+
+  }
+ 
 
   const handleEquipeDataChange = (data) => {
     setEquipe((prev) => ({ ...prev, ...data }));
@@ -54,9 +64,12 @@ export const useCadastroEquipe = () => {
     defaultPosicaoIcon,
     equipe,
     jogadores,
+    validationEquipe,
     handleEquipeDataChange,
     handleJogadoresDataChange,
     handleImagePreviewChange,
     handlePosicaoIconChange,
+    handleEquipeValidation,
+    
   };
 };

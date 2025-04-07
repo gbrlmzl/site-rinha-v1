@@ -2,23 +2,24 @@
 import { useEffect, useState } from "react";
 import { FormControlLabel,Checkbox, TextField, Typography,FormControl, FormGroup, Stack } from "@mui/material";
 import EscolhaPosicao from "./EscolhaPosicao";
-import { Box, Container } from "@mui/system";
+import { Box, Container, padding } from "@mui/system";
+import { CheckBox } from "@mui/icons-material";
 
 
 
 
 function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, stepAtual}) {
     const [localData, setLocalData] = useState(data); // Estado local para armazenar os dados do jogador temporariamente
-
     const stepJogadorOpcional = 6; // Defina o número do passo do jogador opcional aqui 
     const isJogadorOpcional = stepAtual === stepJogadorOpcional; // Verifica se o passo atual é o do jogador opcional
-    
-      useEffect(() => {
+   
+   
+    useEffect(() => {
         setLocalData(data);
       }, [data]);
 
       useEffect(() => {
-        if (onSave) onSave(localData);
+        if (onSave) onSave(localData)
       }, [localData, onSave]);
       
       
@@ -26,12 +27,13 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
     const handleChange = (e) => {
         const{name, value} = e.target;
         setLocalData((prev) => ({ ...prev, [name]: value }));
+        
+  
     };
 
     const handlePosicaoChange = (value) => {  
         setLocalData((prev) => ({ ...prev, posicao: value }));
         onPosicaoChange(value, posicaoIcon); // Atualiza o estado global com a posição selecionada
-
     }
     
     const handleOptionalCheckboxChange = () => {
@@ -48,7 +50,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
             posicao: newDisabledPlayer ? "" : prev.posicao, // Limpa a posição se o jogador for desabilitado
             
         }))
-        onPosicaoChange("Default", posicaoIcon); // Reseta a posição para o ícone padrão
+        onPosicaoChange("Default", posicaoIcon); // Reseta a posição para o ícone padrão 
         
        
 
@@ -59,8 +61,10 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
         setLocalData((prev) => ({
             ...prev,
             isExternalPlayer: newIsExternalPlayer,
-            matricula: newIsExternalPlayer ? "Jogador Externo" : "",
+            matricula: newIsExternalPlayer ? "" : "",
+            
           }));
+          console.log(localData.matricula)
         };
      // Exponha a função de salvar (opcional, se quiser dar um feedback interno)
     
@@ -69,12 +73,12 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
     return (
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <Stack flexDirection={"row"}>
-                <Typography variant="h4" component="h2" sx={{ fontWeight: "bold", pb: 2, textAlign: "center"}}>
+                <Typography variant="h5" component="h2" sx={{ fontWeight: "bold", pb: 2, textAlign: "center"}}>
                     {formTitle}
                 </Typography>
 
                 {isJogadorOpcional && (
-                    <FormControl component="fieldset">
+                <FormControl component="fieldset">
                     <FormGroup row>
                         <FormControlLabel 
                             control={<Checkbox checked={localData.disabledPlayer}   onChange={handleOptionalCheckboxChange}  />}
@@ -85,8 +89,8 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                 </FormControl>
                 )}
             </Stack>
-            <Container >
-                <Stack spacing={2} p={2} sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+            <Container  >
+                <Stack spacing={{xs: 0.75, md: 1}} p={2} sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                     <TextField 
                         type="text" 
                         id="player-name" 
@@ -97,11 +101,17 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                         fullWidth 
                         variant="outlined"
                         margin="dense"
+                        required={!localData.disabledPlayer} // Torna o campo obrigatório se o jogador não for desabilitado
                         disabled={localData.disabledPlayer} // Desabilita o campo se o jogador for desabilitado
+                        
+                        
+                        
                     />
         
-                    <Stack  /*direction="row" spacing={2}  justifyItems="space-between" alignItems="center"*/ sx={{width: "100%", display: "flex", flexDirection:{ xs: 'column', md: 'row' }, alignItems: { xs: 'flex-start', md: 'center' }}}>
-                        <TextField 
+                    <Stack spacing={{xs: 0.5, md: 1}} sx={{width: "100%", display: "flex", flexDirection:{ xs: 'column', md: 'row' }, alignItems: { xs: 'flex-start', md: 'center' },
+                    }}>
+                        <Box sx={{maxWidth:{xs: "100%", md: "60%", width:"100%"}}}>
+                            <TextField 
                             id="player-matricula" 
                             name="matricula" 
                             value={localData.matricula} 
@@ -111,9 +121,10 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                             sx={{flexGrow: {xs: 0, md: 1}, marginRight: {xs: 0, md: 1}, fullWidth: {xs: 0, md: 1}}}
                             variant="outlined"
                             margin="dense"
-                            
-                            
-                        />
+                            required={!localData.isExternalPlayer && !localData.disabledPlayer} // Torna o campo obrigatório se o jogador não for desabilitado e não for externo
+                            type= "number" // Define o tipo do input como número
+                            />
+                        </Box>
                         <FormControl component="fieldset" sx={{marginLeft: {xs: 0, md: 2}}}>
                             <FormGroup row>
                                 <FormControlLabel 
@@ -138,6 +149,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                         onChange={handleChange} 
                         fullWidth
                         margin="dense"
+                        required={!localData.disabledPlayer}
                         disabled={localData.disabledPlayer} // Desabilita o campo se o jogador for desabilitado
                     />
         
@@ -150,12 +162,16 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                         fullWidth
                         variant="outlined" 
                         margin="dense"
+                        required={!localData.disabledPlayer}
                         disabled={localData.disabledPlayer} // Desabilita o campo se o jogador for desabilitado
                     />
         
                     {!isJogadorOpcional && 
-                    <EscolhaPosicao defaultIcon={posicaoIcon} onChange={handlePosicaoChange} />
+                    <Box alignItems="center" justifyItems="center"><EscolhaPosicao defaultIcon={posicaoIcon} onChange={handlePosicaoChange}/>
+                    </Box>
+                    
                     }
+                    
                 </Stack>
             </Container>
         </Box>

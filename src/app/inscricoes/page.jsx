@@ -4,7 +4,7 @@ import Header from '../../components/Navbar/Header';
 
 export default function Inscricoes() {
   return (
-  <div className='w-screen h-screen bg-customGray flex flex-col '>
+  <div>
     <Header />
     <CadastroEquipes />
  </div>

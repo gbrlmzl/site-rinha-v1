@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 import { Box, TextField, Button, Typography, CircularProgress } from "@mui/material";
