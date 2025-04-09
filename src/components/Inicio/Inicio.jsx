@@ -1,24 +1,3 @@
-{/*import Image from 'next/image';
-import rinhaLogoEdicao from '../../assets/imgs/rinhaLogoEdicao.svg';
-import rinhaLogo from '../../assets/imgs/rinhaLogo.svg';
-import SegundaEdicaoInfo from './SegundaEdicaoInfo';
-
-
-import { Box, height, margin, minHeight } from '@mui/system';
-
-function Inicio() {
-    return(
-        <Box sx={{flexDirection:"column", display:"flex", justifyContent:"center", alignItems:"center", bgcolor:"#000000", minHeight:"100%"}} >
-            
-            
-            <SegundaEdicaoInfo></SegundaEdicaoInfo>
-        </Box>
-    )
-
-}
-
-export default Inicio*/}
-
 import Image from 'next/image';
 import rinhaLogoEdicao from '../../assets/imgs/rinhaLogoEdicao.svg';
 import SegundaEdicaoInfo from './SegundaEdicaoInfo';

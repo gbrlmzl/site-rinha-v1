@@ -1,14 +1,23 @@
+// app/theme-provider.jsx
 'use client';
 
-import { ThemeProvider } from '@mui/material/styles';
+import * as React from 'react';
+import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from '../../utils/createEmotionCache';
 import theme from '../theme';
+
+// Cria um cache para uso no client
+const emotionCache = createEmotionCache();
 
 export default function ThemeRegistry({ children }) {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      {children}
-    </ThemeProvider>
+    <CacheProvider value={emotionCache}>
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
+    </CacheProvider>
   );
 }
