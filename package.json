@@ -12,7 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@fontsource/archivo-black": "^5.2.5",
+    "@fontsource/pacifico": "^5.2.5",
+    "@fontsource/rancho": "^5.2.5",
     "@fontsource/roboto": "^5.2.5",
+    "@fontsource/russo-one": "^5.2.5",
     "@mercadopago/sdk-js": "^0.0.3",
     "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",

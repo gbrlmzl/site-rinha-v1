@@ -60,3 +60,10 @@ export const inicialJogadores = [
 }							
  ];
 
+ export const inicialFormPagamento = {
+    nome: "",
+    sobrenome: "",
+    email: "",
+    cpf: "",
+ };
+

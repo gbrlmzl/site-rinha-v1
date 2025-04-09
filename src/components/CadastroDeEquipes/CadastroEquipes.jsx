@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Container, Paper, Stepper, Step, StepLabel, Typography, Snackbar } from "@mui/material";
+import { Box, Button, Container, Paper, Stepper, Step, StepLabel, Typography, Snackbar, Card, Alert } from "@mui/material";
 import EquipeInfo from "./EquipeInfo";
 import JogadorInfo from "./JogadorInfo";
 import ConfirmacaoDadosEquipe from "./ConfirmacaoDadosEquipe";
@@ -7,9 +7,14 @@ import { useCadastroEquipe } from "./useCadastroEquipe";
 import { useState } from "react";
 import { useRef } from "react";
 import Pagamento from "./Pagamento";
+import Image from "next/image";
+
+import '@fontsource/russo-one';
+import { set } from "react-hook-form";
 
 
 const steps = ["Informações da equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)", "Confirmação","Pagamento"];
+
 
 
 function CadastroEquipes() {
@@ -20,14 +25,39 @@ function CadastroEquipes() {
     defaultPosicaoIcon,
     equipe,
     jogadores,
+    formPagamento,  
+    qrCode,
+    qrCodeBase64,
+    qrCodeGerado,
+    loading,
+    aceitaTermos,
+    handleAceitaTermosChange,
     handleEquipeDataChange,
     handleJogadoresDataChange,
     handleImagePreviewChange,
     handlePosicaoIconChange,
+    handlePagamento,
+    handleFormPagamentoChange
   } = useCadastroEquipe();
 
   const jogadorTemporario = useRef(jogadores[currentStep - 1]);
   const stepperRef = useRef(null); // Referência para o contêiner do Stepper
+
+  const valorDaInscricao = () => {
+    const valorBase = 10; // Valor base da inscrição
+    const numeroJogadoresEquipe = jogadores.filter((jogador) => jogador.disabledPlayer === false).length; // Conta os jogadores que não estão desabilitados (disabledPlayer === false)
+    
+    return valorBase * numeroJogadoresEquipe; // Calcula o valor total da inscrição
+  }
+
+  const validarForm = () => {
+    const { cpf } = formPagamento;
+    const cpfRegex = /^\d{11}$/; // Apenas números, exatamente 11 dígitos 
+    if (!cpfRegex.test(cpf)) {
+      return false;
+    }
+    return true;
+  };
 
 
   
@@ -49,13 +79,29 @@ function CadastroEquipes() {
         return; // Se não foi selecionada, não avança para o próximo passo
       }
     }
-    handleJogadoresDataChange(jogadorTemporario.current, currentStep - 1); // Atualiza os dados do jogador temporário no estado global
-    setCurrentStep((prev) => {
-      const nextStep = prev + 1;
-      scrollToStep(nextStep); // Rola para o próximo passo
-      return nextStep;
-    });
-  };
+    currentStep !== 0 && currentStep <= 6 && handleJogadoresDataChange(jogadorTemporario.current, currentStep - 1);  //Atualiza os dados dos jogadores globalmente
+
+    if (currentStep === 8) {
+      if(validarForm()){
+        handlePagamento();
+      }else{
+        setSnackbarCpfErrorOpen(true); // Abre snackbar de erro de CPF
+
+      }
+      
+
+    } else {
+      setCurrentStep((prev) => {
+        const nextStep = prev + 1;
+        scrollToStep(nextStep);
+        return nextStep;
+      });
+    }
+
+    
+
+    };
+  ;
 
   //const handlePrevious = () => setCurrentStep((prev) => prev - 1);
   const handlePrevious = () => {
@@ -76,6 +122,7 @@ function CadastroEquipes() {
   };
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarCpfErrorOpen, setSnackbarCpfErrorOpen] = useState(false); // Snackbar para erro de CPF
 
   const enviarDadosParaAPI = async () => {
     try {
@@ -95,9 +142,10 @@ function CadastroEquipes() {
     }
   };
 
+
   return (
     <Box component="form" onSubmit={handleNext} autoComplete="off" sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "#f5f5f5" }}>
-      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color: "#333" }}>
+      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color: "#333", fontFamily: "Russo One"}}>
           Cadastro de Equipe
       </Typography>
       <Container maxWidth="md" sx={{paddingBottom: 3 }}>
@@ -149,14 +197,40 @@ function CadastroEquipes() {
               stepAtual={currentStep}
             />
           ) : currentStep === 7 ?(
-            <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview}/>
+            <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview} aceita={aceitaTermos} onAceitaTermos={handleAceitaTermosChange}/>
           ):(
-            <Pagamento valor={20/* função para calcular valor com base no número de players*/} /*onSubmit={}*//>
-          )}
+            <Box>
+              {!qrCodeGerado ? (
+                <Pagamento valor={valorDaInscricao()} data={formPagamento} onChange={handleFormPagamentoChange} />
+              ): (
+                qrCodeBase64 && 
+                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection:"column", gap:2, paddingTop: 1}}>
+                  <Card sx={{width: 200, height: 200, display: "flex", justifyContent: "center", alignItems: "center", }}>
+                    <Image src={qrCodeBase64} width={200} height={200} alt="QR Code"></Image>
+                  </Card>
+                  <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valorDaInscricao()}</Typography>
+                  <Button variant="contained" color="primary" sx={{borderRadius: 4}}
+                  onClick={() => {navigator.clipboard.writeText(qrCode), setSnackbarOpen(true)}}>
+                        Copiar PIX
+                  </Button>
+
+
+
+                </Box>
+
+                
+              )}
+              
+              
+            </Box>
+            
+            )}
         </Box>
 
         {/* Botões de navegação */}
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 , paddingX: { xs: 1, sm: 2, md: 5 },}}>
+        <Box sx={{ display: "flex", 
+          justifyContent: currentStep === steps.length - 1 ? "center" : "space-between"
+           , mt: 2 , paddingX: { xs: 1, sm: 2, md: 5 },}}>
           {currentStep < steps.length - 1 && (
             <Button  variant="contained"  disabled={currentStep === 0} onClick={handlePrevious} sx={{
               backgroundColor: '#1976d2',   // cor de fundo
@@ -181,14 +255,19 @@ function CadastroEquipes() {
               Próximo
             </Button>
           ) : currentStep === steps.length - 2 ? (
-            <Button variant="contained" color="success" onClick={handleNextConfirmation}>
+            <Button variant="contained" color="success" onClick={handleNext} disabled={!aceitaTermos} >
               Pagamento
             </Button>
-          ) : (
-            <div></div>
-          )
+          ) : currentStep === steps.length - 1 && !qrCodeGerado ? (
+            <Button type= "submit" variant="contained" color="success" disabled={loading}>
+              Gerar QR Code PIX
+            </Button> 
 
-          }
+          ) : (
+            <div>
+
+            </div>
+          )}
         </Box>
       </Paper>
 
@@ -197,10 +276,24 @@ function CadastroEquipes() {
         open={snackbarOpen}
         autoHideDuration={3000}
         onClose={() => setSnackbarOpen(false)}
-        message="Cadastro realizado com sucesso!"
+        message="Código para pagamento copiado!"
       />
+      
+        <Snackbar
+          open={snackbarCpfErrorOpen}
+          autoHideDuration={3000}
+          onClose={() => setSnackbarCpfErrorOpen(false)}
+          message="CPF inválido!"
+          type="error"
+        >
+          <Alert onClose={() => setSnackbarCpfErrorOpen(false)} severity="error" sx={{ width: '100%' }}>
+            CPF inválido!
+          </Alert>
+        </Snackbar>
+     
     </Container>
     </Box>
+
     
   );
 }

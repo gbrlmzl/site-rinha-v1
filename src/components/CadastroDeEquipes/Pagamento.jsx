@@ -3,62 +3,19 @@ import { useEffect, useState } from "react";
 import { loadMercadoPago } from "@mercadopago/sdk-js";
 import { Box, TextField, Button, Typography, CircularProgress } from "@mui/material";
 
-const Pagamento = ({ valor }) => {
-  const [form, setForm] = useState({
-    nome: "",
-    sobrenome: "",
-    email: "",
-    cpf: "",
-  });
+const Pagamento = ({ valor, qrCode, loading, data, onChange}) => {
 
-  const [qrCode, setQrCode] = useState(null); // guarda o base64 da imagem
-  const [loading, setLoading] = useState(false); // estado de carregamento
+
+
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    onChange({ ...data, [name]: value });
   };
-
-  useEffect(() => {
-    (async () => {
-      await loadMercadoPago();
-      new window.MercadoPago("PUBLIC_KEY");
-    })();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setQrCode(null); // limpa QR antigo
-
-    try {
-      const response = await fetch("/api/pagamento", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nome: form.nome,
-          sobrenome: form.sobrenome,
-          email: form.email,
-          cpf: form.cpf,
-          valor: valor,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.qr_code_base64) {
-        setQrCode(`data:image/png;base64,${data.qr_code_base64}`);
-      } else {
-        alert("Erro ao gerar QR Code.");
-      }
-    } catch (err) {
-      console.error("Erro:", err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 500, margin: "0 auto", p: 3 }}>
+    <Box  sx={{ maxWidth: 500, margin: "0 auto", p: 3 }}>
       <Typography variant="h6" mb={2}>
         Dados para o pagamento
       </Typography>
@@ -68,7 +25,7 @@ const Pagamento = ({ valor }) => {
           fullWidth
           label="Nome"
           name="nome"
-          value={form.nome}
+          value={data.nome}
           onChange={handleChange}
           required
         />
@@ -77,7 +34,7 @@ const Pagamento = ({ valor }) => {
           fullWidth
           label="Sobrenome"
           name="sobrenome"
-          value={form.sobrenome}
+          value={data.sobrenome}
           onChange={handleChange}
           required
         />
@@ -87,7 +44,7 @@ const Pagamento = ({ valor }) => {
           label="E-mail"
           name="email"
           type="email"
-          value={form.email}
+          value={data.email}
           onChange={handleChange}
           required
         />
@@ -96,31 +53,19 @@ const Pagamento = ({ valor }) => {
           fullWidth
           label="CPF (Apenas números)"
           name="cpf"
-          value={form.cpf}
+          value={data.cpf}
           onChange={handleChange}
           required
           
         />
 
-        <input type="hidden" name="valor" value={valor} />
-
       </Box>
 
-     
-
-      <Button type="submit" variant="contained" fullWidth sx={{ mt: 3 }} disabled={loading}>
-        {loading ? <CircularProgress size={24} color="inherit" /> : "Gerar QR Code PIX"}
-      </Button>
-
-      {qrCode && (
-        <Box mt={4} textAlign="center">
-          <Typography variant="h6" gutterBottom>
-            Escaneie o QR Code para pagar:
-          </Typography>
-          <img src={qrCode} alt="QR Code PIX" style={{ width: 250, height: 250 }} />
-        </Box>
-        
-      )}
+      <Box>
+        <Typography sx={{ mt: 2 }} variant="h7">
+          Taxa de inscrição : {valor} R$
+        </Typography>
+      </Box>
     </Box>
   );
 };

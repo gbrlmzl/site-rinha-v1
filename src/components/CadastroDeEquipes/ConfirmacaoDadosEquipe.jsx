@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview }) {
+function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAceitaTermos  }) {
   return (
     <Box>
       <Container maxWidth="md">
@@ -85,15 +85,15 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview }) {
                     width: { xs: "100%", md: "65%" },
                     alignItems: "center",
                     boxShadow: 2,
-                    borderRadius: "40px",
+                    borderRadius: "20px",
                     padding: 0,
                     "&:before": {
                       display: "none", // Remove a linha preta superior padrão
                     },
                   }}
                 >
-                  <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography fontWeight={600}>
+                  <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+                    <Typography fontWeight={600} >
                       {jogador.nickname}
                     </Typography>
                     {index === 0 && (
@@ -105,13 +105,15 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview }) {
                         }}
                       />
                     )}
+
+
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Typography variant="body2" color="textSecondary">
+                    <Typography variant="body1" color="textSecondary">
                       Discord: {jogador.discordUser}
                     </Typography>
                     {jogador.isExternalPlayer && (
-                      <Typography variant="body2" color="warning.main">
+                      <Typography variant="body1" color="warning.main">
                         Jogador externo
                       </Typography>
                     )}
@@ -131,6 +133,8 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview }) {
         >
           <FormControlLabel
             control={<Checkbox color="primary" />}
+            checked={aceita}
+            onChange={(e) => onAceitaTermos(e)}
             label={
               <Typography variant="body2" sx={{ fontSize: { xs: 12, sm: 14 } }}>
                 Concordo com as diretrizes do regulamento deste torneio.

@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
-import { Box, Button, TextField, Typography, Grid, Card, CardMedia } from "@mui/material";
+import { Box, Button, TextField, Typography, Grid, Card, CardMedia, Input } from "@mui/material";
 import { CloudUpload } from "@mui/icons-material";
-import { styled } from "@mui/system";
+import { color, fontFamily, fontWeight, styled } from "@mui/system";
+import '@fontsource/russo-one';
 
 function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview }) {
   
@@ -66,12 +67,18 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
         <Grid autoComplete="off" item xs={12}>
           <TextField
             fullWidth
-            label="Nome da Equipe"
+            placeholder="Nome da Equipe"
             variant="outlined"
             name="nomeEquipe"
             value={data.nomeEquipe}
             onChange={handleEquipeChange}
             required
+            
+            
+            sx={{ borderRadius: 4, backgroundColor: "#fff", "& .MuiOutlinedInput-root": { borderRadius: 4, height:50},height: 50, }}
+            slotProps={{htmlInput: { style: { textAlign: "center", fontSize: "1.65rem", fontFamily:"Russo One", fontWeight: 600 }},}}
+            
+            
           />
         </Grid>
       </Grid>

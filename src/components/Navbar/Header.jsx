@@ -45,9 +45,10 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static" sx={{backgroundColor: "#0E1241"}}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="sticky" sx={{backgroundColor: "#0E1241", borderBottom: "2px solid rgb(208, 45, 241)"}}> {/* Define propriedades do AppBar */}
+      
+      <Container maxWidth="xl" sx={{ px: {xs: 1, md: 0}, py:{xs: 0.125, md: 0}, m: 0 }}>
+        <Toolbar disableGutters > {/* Alinha o conteúdo do Toolbar para ocupar todo o espaço disponível */}
           {/*<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}
           <IconButton  sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}> {/* Desativar sombreamento de clique e colocar um Onclick*/}
                 <Image src={rinhaLogo} alt="" width={40} height={40} />
@@ -79,7 +80,7 @@ function ResponsiveAppBar() {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: 32 }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -97,16 +98,30 @@ function ResponsiveAppBar() {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' }  }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{backgroundColor:"blue"}} > {/*Define propriedades do menu para telas menores*/}
-                  <Typography sx={{ textAlign: 'center'}} fontFamily={"Archivo-Black"} color='#FF0A0A'>{page}</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+              {/*{pages.map((page) => (
+                <MenuItem key={page} onClick={handleCloseNavMenu} sx={{backgroundColor:"blue"}} > 
+                  <Typography sx={{ textAlign: 'center'}} fontFamily={"Archivo-Black"} color='#FF0A0A'>{page}</Typography> 
                 </MenuItem>
-              ))}
+              ))}*/}
+
+              <MenuItem key={"inicio"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
+                <Link href="/" style={{ textDecoration: 'none'}}>
+                  <Typography sx={{ textAlign: 'center'}} fontFamily={"Archivo-Black"} color='#000000'>Início</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                </Link>
+              </MenuItem>
+
+              <MenuItem key={"inscricoes"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
+                <Link href="/inscricoes" style={{ textDecoration: 'none'}}>
+                  <Typography sx={{ textAlign: 'center'}} fontFamily={"Archivo-Black"} color='#000000'>Inscrição</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                </Link>
+              </MenuItem>
             </Menu>
           </Box>
           {/*<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />*/}
           <IconButton  sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
-                <Image src={rinhaLogo} alt="" width={40} height={40} />
+                <Link href={"/"} style={{ textDecoration: 'none'}}>
+                  <Image src={rinhaLogo} alt="" width={55} height={55} />
+                </Link>
           </IconButton>
           
           
@@ -128,16 +143,25 @@ function ResponsiveAppBar() {
           >
             LOGO
           </Typography>*/}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2  }}>{/*Define propriedades do menu para telas maiores*/}
-            {pages.map((page) => (
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2,   }}>{/*Define propriedades do menu para telas maiores*/}
+            {/*{pages.map((page) => (
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{my: 2, color: 'white', display: 'block', gap: 2, fontFamily: 'Archivo-Black', fontSize: 20,   padding: 1, "&:hover": {color: "#FF0A0A"}}} /*Define propriedades do texto do menu para telas maiores*/
-                >
+                  sx={{my: 2, color: 'white', display: 'block', gap: 2, fontFamily: 'Archivo-Black', fontSize: 20,   padding: 1, "&:hover": {color: "#FF0A0A"}}}
                   {page}
                 </Button>
-            ))}
+            ))}*/}
+            <Link href="/" style={{ textDecoration: 'none'}}>
+              <Button
+                sx={{my: 2, color: 'white', display: 'block', gap: 2, fontFamily: 'Archivo-Black', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
+              >
+                Início
+              </Button>
+            </Link>
+
+
+
             <Link href="inscricoes" style={{ textDecoration: 'none'}}>
               <Button
                 sx={{my: 2, color: 'white',  fontFamily: 'Archivo-Black', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
@@ -146,7 +170,7 @@ function ResponsiveAppBar() {
               </Button>
             </Link>
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          {/*<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -174,7 +198,7 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>*/}
         </Toolbar>
       </Container>
     </AppBar>
