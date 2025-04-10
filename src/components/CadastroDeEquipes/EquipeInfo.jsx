@@ -4,6 +4,10 @@ import { Box, Button, TextField, Typography, Grid, Card, CardMedia, Input } from
 import { CloudUpload } from "@mui/icons-material";
 import { color, fontFamily, fontWeight, styled } from "@mui/system";
 import '@fontsource/russo-one';
+import "@fontsource/archivo-black";
+import '@fontsource/roboto' // Peso padrão (400)
+import UploadIcon from '@mui/icons-material/Upload';
+
 
 function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview }) {
   
@@ -37,7 +41,7 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
 
   return (
     <Box sx={{ maxWidth: 500, p: {xs: 1.5, md: 2}, mx: "auto"}}>
-      <Typography fontFamily={"Roboto"} fontSize={30} gutterBottom align="center">
+      <Typography  variant="h4" fontFamily={"Russo One"} gutterBottom align="center">
         {formTitle}
       </Typography>
 
@@ -56,9 +60,9 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
         </Grid>
 
         {/* Botão de Upload */}
-        <Grid item xs={12} display="flex" justifyContent="center">
+        <Grid item xs={12} display="flex" justifyContent="center" alignItems={"center"}>
           <Button component="label" variant="contained" /*startIcon={<CloudUpload />}*/color="primary" >
-            Carregar Escudo
+           <Typography sx={{marginRight:1}}>Escudo</Typography><UploadIcon width={40} height={40} ></UploadIcon>
             <VisuallyHiddenInput type="file" accept="image/*" onChange={handleImageUpload} />
           </Button>
         </Grid>
@@ -76,7 +80,7 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
             
             
             sx={{ borderRadius: 4, backgroundColor: "#fff", "& .MuiOutlinedInput-root": { borderRadius: 4, height:50},height: 50, }}
-            slotProps={{htmlInput: { style: { textAlign: "center", fontSize: "1.65rem", fontFamily:"Russo One", fontWeight: 600 }},}}
+            slotProps={{htmlInput: { style: { textAlign: "center", fontSize: "1.65rem", fontFamily:"Roboto", fontWeight: 600 }},}}
             
             
           />

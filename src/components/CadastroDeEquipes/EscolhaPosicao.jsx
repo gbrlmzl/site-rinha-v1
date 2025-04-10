@@ -88,7 +88,7 @@ function EscolhaPosicao({onChange, defaultIcon}) {
                 gap: 1, // Espaçamento entre os itens
                 // Espaçamento interno do menu
                 //backgroundColor: "#000000",//"#0A96AA", // Cor de fundo personalizada
-                backgroundImage: "linear-gradient(to bottom, #0A96AA, #000000)", // Gradiente de fundo
+                backgroundImage: "linear-gradient(to bottom,#F5F5F5,rgb(100, 100, 100))", // Gradiente de fundo
                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.35)", // Sombra para destaque
                 borderRadius: "8px", // Bordas arredondadas
                 width:"fit-content", // Largura do menu

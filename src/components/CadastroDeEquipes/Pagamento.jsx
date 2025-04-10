@@ -1,9 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
-import { loadMercadoPago } from "@mercadopago/sdk-js";
 import { Box, TextField, Button, Typography, CircularProgress } from "@mui/material";
+import "@fontsource/russo-one"
+import "@fontsource/rancho"
+import "@fontsource/roboto"
+import Image from "next/image";
 
-const Pagamento = ({ valor, qrCode, loading, data, onChange}) => {
+import siteSeguroBanner from "../../assets/imgs/siteSeguroBanner.svg"
+import { height, width } from "@mui/system";
+
+const Pagamento = ({ valor, data, onChange}) => {
 
 
 
@@ -15,12 +20,15 @@ const Pagamento = ({ valor, qrCode, loading, data, onChange}) => {
   
 
   return (
-    <Box  sx={{ maxWidth: 500, margin: "0 auto", p: 3 }}>
-      <Typography variant="h6" mb={2}>
-        Dados para o pagamento
+    <Box  sx={{ maxWidth: 500, margin: "0 auto", p: 2, alignItems: "center", textAlign: "center" }}>
+      <Typography variant="h4" fontFamily={"Russo One"} mb={1}>
+        Pagamento
+      </Typography>
+      <Typography variant="h6" fontFamily={"Roboto"} mb={2}>
+        Taxa de inscrição: R$ {valor} <br />
       </Typography>
       
-      <Box >
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
         <TextField
           fullWidth
           label="Nome"
@@ -61,11 +69,11 @@ const Pagamento = ({ valor, qrCode, loading, data, onChange}) => {
 
       </Box>
 
-      <Box>
-        <Typography sx={{ mt: 2 }} variant="h7">
-          Taxa de inscrição : {valor} R$
-        </Typography>
+      <Box sx={{width:"100%"}} >
+        <Image src={siteSeguroBanner} style={{width:"100%", height:"auto"}} alt="Site seguro"></Image>
       </Box>
+
+
     </Box>
   );
 };

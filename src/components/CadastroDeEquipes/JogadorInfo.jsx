@@ -8,10 +8,14 @@ import { CheckBox } from "@mui/icons-material";
 
 
 
-function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, stepAtual}) {
+function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, stepAtual, dataEquipe, onEmailChange}) {
     const [localData, setLocalData] = useState(data); // Estado local para armazenar os dados do jogador temporariamente
-    const stepJogadorOpcional = 6; // Defina o número do passo do jogador opcional aqui 
+    const stepJogadorOpcional = 6; // Defina o número do passo do jogador opcional aqui
+    const stepJogadorCapitao = 1; // Defina o número do passo do jogador capitão aqui 
+
     const isJogadorOpcional = stepAtual === stepJogadorOpcional; // Verifica se o passo atual é o do jogador opcional
+    const isMatriculasObrigatorias = stepAtual >= 1 && stepAtual <= 3; // Verifica se o passo atual é o do jogador capitão
+    const isJogadorCapitao = stepAtual === stepJogadorCapitao; // Verifica se o passo atual é o do jogador capitão
    
    
     useEffect(() => {
@@ -26,7 +30,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
 
     const handleChange = (e) => {
         const{name, value} = e.target;
-        setLocalData((prev) => ({ ...prev, [name]: value }));
+        name === "emailContato" ? onEmailChange({ ...dataEquipe, [name]: value }) : setLocalData((prev) => ({ ...prev, [name]: value }));
         
   
     };
@@ -73,7 +77,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
     return (
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <Stack flexDirection={"row"}>
-                <Typography variant="h5" component="h2" sx={{ fontWeight: "bold", pb: 2, textAlign: "center"}}>
+                <Typography variant="h5" component="h2" sx={{ fontWeight: "bold", pb: 2, textAlign: "center", fontFamily:"Russo One"}}>
                     {formTitle}
                 </Typography>
 
@@ -90,7 +94,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                 )}
             </Stack>
             <Container  >
-                <Stack spacing={{xs: 0.75, md: 1}} p={2} sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
+                <Stack spacing={{xs: 0.5, md: 1}} pt={1.25} pb={1}  sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
                     <TextField 
                         type="text" 
                         id="player-name" 
@@ -108,9 +112,9 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                         
                     />
         
-                    <Stack spacing={{xs: 0.5, md: 1}} sx={{width: "100%", display: "flex", flexDirection:{ xs: 'column', md: 'row' }, alignItems: { xs: 'flex-start', md: 'center' },
-                    }}>
-                        <Box sx={{maxWidth:{xs: "100%", md: "60%", width:"100%"}}}>
+                    <Stack   sx={{width: "100%", display: "flex", flexDirection:{ xs: 'column', md: 'row' }, alignItems: { xs: 'flex-start', md: 'center' },
+                    }} >
+                        <Box sx={{maxWidth:{xs: "100%", md: "60%"}, width:"100%"}}>
                             <TextField 
                             id="player-matricula" 
                             name="matricula" 
@@ -118,25 +122,40 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                             onChange={handleChange} 
                             disabled={localData.isExternalPlayer || localData.disabledPlayer} // Desabilita o campo se o jogador for desabilitado ou se for um jogador externo
                             label={localData.isExternalPlayer ? "" : "Matrícula"} 
-                            sx={{flexGrow: {xs: 0, md: 1}, marginRight: {xs: 0, md: 1}, fullWidth: {xs: 0, md: 1}}}
+                            sx={{flexGrow: {xs: 0, md: 1}, marginRight: {xs: 0, md: 1}, }}
+                            fullWidth 
                             variant="outlined"
                             margin="dense"
                             required={!localData.isExternalPlayer && !localData.disabledPlayer} // Torna o campo obrigatório se o jogador não for desabilitado e não for externo
                             />
                         </Box>
-                        <FormControl component="fieldset" sx={{marginLeft: {xs: 0, md: 2}}}>
+                        <FormControl component="fieldset" sx={{marginLeft: {xs: 0, md: 2}, }}>
                             <FormGroup row>
                                 <FormControlLabel 
-                                    control={<Checkbox checked={localData.isExternalPlayer} onChange={handleCheckboxChange} />} 
+                                    control={<Checkbox checked={localData.isExternalPlayer} onChange={handleCheckboxChange}  />} 
                                     label="Não possui matrícula" 
                                     sx={{flexGrow: 1, marginLeft: {xs: 0, md: 2}}}
-                                    disabled={localData.disabledPlayer} // Desabilita o campo se o jogador for desabilitado
+                                    disabled={isMatriculasObrigatorias || localData.disabledPlayer} // Desabilita o campo se o jogador for desabilitado
                                     
 
                                 />
+                                
                             </FormGroup>
-                        </FormControl>
+                        </FormControl>            
                     </Stack>
+                    {isJogadorCapitao && 
+                        <TextField 
+                            id="player-email" 
+                            name="emailContato" 
+                            value={dataEquipe.emailContato}
+                            type="email" 
+                            label="Email para contato" 
+                            onChange={handleChange} 
+                            fullWidth
+                            variant="outlined" 
+                            margin="dense"
+                            
+                        />}
         
                     <TextField 
                         type="text" 

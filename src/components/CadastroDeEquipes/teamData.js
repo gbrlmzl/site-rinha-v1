@@ -1,6 +1,7 @@
 export const inicialEquipe = {
-    nomeEquipe: "",
-    escudo: ""
+    "nomeEquipe": "",
+    "escudo": "",
+    "emailContato": ""
 };
 export const inicialJogadores = [
     {

@@ -1,42 +1,70 @@
 import { createTheme } from '@mui/material/styles';
-/*import {ArchivoBlack} from 'next/font/google';
+import { fontFamily, margin, positions, width } from '@mui/system';
+import '@fontsource/roboto'
+import "@fontsource/russo-one"
 
-const ArchivoBlack = ArchivoBlack({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-archivo-black',
-});*/
 
 const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#0051E6',
+      contrastText: '#FFFFFF',
+    },
+    secondary: {
+      main: '#000000',
+      contrastText: '#E3E3E3',
+    },
+    background: {
+      default: '#000000',
+    },
+  },
   components: {
+    MuiAccordionSummary: {
+      styleOverrides: {
+        content: {
+          // aqui você estiliza a classe `.MuiAccordionSummary-content`
+          justifyContent: 'center',
+          padding: '0 8px',
+          fontWeight: 600,
+        },
+        contentGutters: {
+          // aqui você estiliza a `.MuiAccordionSummary-contentGutters`
+          marginLeft: '16px',
+        },
+      },
+    },
+    MuiAccordionDetails: {
+      styleOverrides: {
+        root: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column',
+          
+        },
+      },
+    },
+  },
+    
     MuiTextField: {
       defaultProps: {
         variant: 'outlined',
         margin: 'dense',
+        
         fullWidth: true,
-      },
-    },
+        
+      }
+  },
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
+          fontFamily: "Roboto",
           fontSize: '0.85rem',
+          fontWeight: 500,
           height: '40px',
           '@media (min-width:600px)': {
             fontSize: '1rem',
             height: '56px',
-          },
-
-          // Remove os spinners (setas) de inputs type="number"
-          '& input[type=number]': {
-            MozAppearance: 'textfield',
-          },
-          '& input[type=number]::-webkit-outer-spin-button': {
-            WebkitAppearance: 'none',
-            margin: 0,
-          },
-          '& input[type=number]::-webkit-inner-spin-button': {
-            WebkitAppearance: 'none',
-            margin: 0,
           },
         },
         input: {
@@ -44,6 +72,7 @@ const theme = createTheme({
           '@media (min-width:600px)': {
             padding: '16.5px 14px',
           },
+          
         },
       },
     },
@@ -53,6 +82,8 @@ const theme = createTheme({
           fontSize: '0.75rem',
           '@media (min-width:600px)': {
             fontSize: '1rem',
+            
+            
           },
         },
       },
@@ -77,9 +108,42 @@ const theme = createTheme({
         },
       },
     },
+    typography: {
+      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontSize: 14,
+      h1: {
+        fontSize: '2rem',
+        fontWeight: 700,
+      },
+      h2: {
+        fontSize: '1.75rem',
+        fontWeight: 600,
+      },
+      h3: {
+        fontSize: '1rem',
+        fontFamily: 'Archivo Black',
+        fontWeight: 700,
+      },
+      body2: {
+        fontSize: '0.875rem',
+        
+      },
+      title: {
+        fontSize: '1.5rem',
+        fontFamily: 'Russo One',
+        fontWeight: 700,
+      },
+      text1:{
+        fontSize: '1rem',
+        fontFamily: 'Russo One',
+        fontWeight: 400,
+      }
+
+    },
+    
     
   },
-});
+);
 
 export default theme;
 

@@ -7,6 +7,7 @@ import rinhaLogoEdicao from '../../assets/imgs/rinhaLogoEdicao.svg';
 import Image from "next/image";
 import { LinearScale } from "@mui/icons-material";
 import Link from "next/link";
+import "@fontsource/russo-one"
 
 function InfoBox(){
     return(
@@ -16,21 +17,28 @@ function InfoBox(){
           
           title="Rinha do Campus IV"
         />*/}
-        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-             <Image src={rinhaLogoEdicao} width={150} alt="Logo da Rinha do Campus IV"></Image>
+        <Box sx={{ display: 'flex', justifyContent: 'center', width:260, height:150, mx:"auto", bgcolor:"#D9D9D9", px:2 }}>
+          <Typography  sx={{alignSelf:"center", color:"#000000", textAlign:"center"}}>
+              Coletânea de clipes engraçados da edição passada 
+          </Typography>
+             
         </Box>
         <CardContent>
-          <Typography gutterBottom sx={{fontFamily:"Arial", fontSize:"1.5rem"}} component="div">
-            LÁ VEM A SEGUNDITA
+          <Typography variant="title" gutterBottom sx={{ fontSize:"1.3rem", textAlign:"center"}} component="div">
+            A SEGUNDA EDIÇÃO VEM AÍ...
           </Typography>
-          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates debitis autem quod quam perspiciatis voluptatem! Distinctio perferendis quibusdam dolorum, ea architecto ullam accusantium sunt voluptatum, officiis rerum sequi numquam fugiat?
+          <Typography variant="text1" sx={{ color: 'text.secondary' }}>
+            A Rinha do Campus IV está de volta! Prepare-se para mais uma edição cheia de diversão, competição e muitas risadas. 
+            <br /> 
+            <br />
+            Em breve, mais informações sobre a data e as inscrições!
+
           </Typography>
         </CardContent>
         <CardActions sx={{display:"flex", justifyContent:"center"}} >
           <Button sx={{backgroundColor:"cyan", color:"#000000", fontSize: {xs: "1rem", md:"1rem"}}}>
           <Link href="/inscricoes" style={{ textDecoration: "none", color: "inherit" }}>
-                Inscrições
+                Mais informações
           </Link>
 
           </Button>

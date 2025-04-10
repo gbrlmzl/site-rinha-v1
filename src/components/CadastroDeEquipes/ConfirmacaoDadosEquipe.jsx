@@ -16,9 +16,15 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import NextLink from "next/link";
+import Link from "@mui/material/Link";
+
+import {FaDiscord} from "react-icons/fa";
+
 function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAceitaTermos  }) {
   return (
     <Box>
+      {aceita &&(console.log(dataEquipe.escudo))}
       <Container maxWidth="md">
         {/* Escudo e Nome da Equipe */}
         <Box sx={{ textAlign: "center", mb: 4 }}>
@@ -58,7 +64,7 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAc
             )}
           </Card>
 
-          <Typography variant="h4" component="h1" gutterBottom mt={2}>
+          <Typography fontFamily={"Russo One"} fontSize={"2rem"} component="h1" gutterBottom mt={2}>
             {dataEquipe.nomeEquipe}
           </Typography>
         </Box>
@@ -87,6 +93,7 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAc
                     boxShadow: 2,
                     borderRadius: "20px",
                     padding: 0,
+                    backgroundColor: "#F0F0F0",
                     "&:before": {
                       display: "none", // Remove a linha preta superior padrão
                     },
@@ -109,14 +116,15 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAc
 
                   </AccordionSummary>
                   <AccordionDetails>
-                    <Typography variant="body1" color="textSecondary">
-                      Discord: {jogador.discordUser}
-                    </Typography>
-                    {jogador.isExternalPlayer && (
-                      <Typography variant="body1" color="warning.main">
-                        Jogador externo
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexDirection: "row" }}>
+                      <FaDiscord size={20} color="#5865F2" ></FaDiscord>
+                      <Typography variant="body1" color="textSecondary">
+                          {jogador.discordUser}
                       </Typography>
-                    )}
+                      
+
+                    </Box>
+                    
                   </AccordionDetails>
                 </Accordion>
               ))}
@@ -137,7 +145,18 @@ function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAc
             onChange={(e) => onAceitaTermos(e)}
             label={
               <Typography variant="body2" sx={{ fontSize: { xs: 12, sm: 14 } }}>
-                Concordo com as diretrizes do regulamento deste torneio.
+                Concordo com as diretrizes do{" "}
+                  <Link
+                    component={NextLink}
+                    href="/regulamento"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    underline="hover"
+                    sx={{ fontWeight: 500 }}
+                  >
+                    Regulamento
+                  </Link>{" "}
+                  deste torneio.
               </Typography>
             }
           />

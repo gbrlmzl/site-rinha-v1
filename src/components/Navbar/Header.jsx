@@ -12,7 +12,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import rinhaLogo from '../../assets/imgs/rinhaLogo.svg';
+import rinhaLogo from '../../assets/imgs/rinhaTitleLogo.svg';
 import AdbIcon from '@mui/icons-material/Adb';
 import Image from 'next/image';
 import rinhaLogoTitulo from '../../assets/imgs/rinhaLogoTitulo.svg';

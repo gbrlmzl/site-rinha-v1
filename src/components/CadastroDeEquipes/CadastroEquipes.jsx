@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Container, Paper, Stepper, Step, StepLabel, Typography, Snackbar, Card, Alert } from "@mui/material";
+import { Box, Button, Container, Paper, Stepper, Step, StepLabel, Typography, Snackbar, Card, Alert, CircularProgress } from "@mui/material";
 import EquipeInfo from "./EquipeInfo";
 import JogadorInfo from "./JogadorInfo";
 import ConfirmacaoDadosEquipe from "./ConfirmacaoDadosEquipe";
@@ -8,8 +8,11 @@ import { useState } from "react";
 import { useRef } from "react";
 import Pagamento from "./Pagamento";
 import Image from "next/image";
+import pixLogo from "../../assets/imgs/pixLogo.svg"
+
 
 import '@fontsource/russo-one';
+import "@fontsource/roboto";
 import { set } from "react-hook-form";
 
 
@@ -31,13 +34,16 @@ function CadastroEquipes() {
     qrCodeGerado,
     loading,
     aceitaTermos,
+    pagamentoAprovado,
+
     handleAceitaTermosChange,
     handleEquipeDataChange,
     handleJogadoresDataChange,
     handleImagePreviewChange,
     handlePosicaoIconChange,
     handlePagamento,
-    handleFormPagamentoChange
+    handleFormPagamentoChange,
+
   } = useCadastroEquipe();
 
   const jogadorTemporario = useRef(jogadores[currentStep - 1]);
@@ -144,12 +150,12 @@ function CadastroEquipes() {
 
 
   return (
-    <Box component="form" onSubmit={handleNext} autoComplete="off" sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", backgroundColor: "#f5f5f5" }}>
-      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color: "#333", fontFamily: "Russo One"}}>
+    <Box component="form" onSubmit={handleNext} autoComplete="off" sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color:"white", fontFamily: "Russo One"}}>
           Cadastro de Equipe
       </Typography>
       <Container maxWidth="md" sx={{paddingBottom: 3 }}>
-      <Paper elevation={3} sx={{ p: 3, backgroundColor: "#D8D5D5", height: {xs: "auto", md: "auto" }}} >
+      <Paper elevation={3} sx={{ p: 3, height: {xs: "auto", md: "auto" }}} >
         
 
         {/* Stepper para indicar progresso */}
@@ -175,7 +181,7 @@ function CadastroEquipes() {
         </Box>
 
         {/* Conteúdo do formulário */}
-        <Box  sx={{ mt: 1, }}>
+        <Box  sx={{ mt: 1, px:{xs:0, md:6} }}>
             
 
           {currentStep === 0 ? (
@@ -195,33 +201,42 @@ function CadastroEquipes() {
               posicaoIcon={defaultPosicaoIcon[currentStep - 1]}
               onPosicaoChange={(value) => handlePosicaoIconChange(value, currentStep - 1)}
               stepAtual={currentStep}
+              dataEquipe={equipe}
+              onEmailChange={handleEquipeDataChange}
             />
           ) : currentStep === 7 ?(
             <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview} aceita={aceitaTermos} onAceitaTermos={handleAceitaTermosChange}/>
-          ):(
-            <Box>
-              {!qrCodeGerado ? (
+            
+          ): (
+            <Box sx={{ minHeight: 300, display: "flex", justifyContent: "center", alignItems: "center" }}>
+              {loading ? (
+                <CircularProgress size={60}/>
+              ): !qrCodeGerado ? (
                 <Pagamento valor={valorDaInscricao()} data={formPagamento} onChange={handleFormPagamentoChange} />
-              ): (
-                qrCodeBase64 && 
-                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection:"column", gap:2, paddingTop: 1}}>
+              ): qrCodeGerado && !pagamentoAprovado ?( 
+                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection:"column", gap:1, paddingTop: 1}}>
+                  <Image src={pixLogo} width={125} height={"auto"} alt="Logo do Pix"></Image>
                   <Card sx={{width: 200, height: 200, display: "flex", justifyContent: "center", alignItems: "center", }}>
                     <Image src={qrCodeBase64} width={200} height={200} alt="QR Code"></Image>
                   </Card>
                   <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valorDaInscricao()}</Typography>
-                  <Button variant="contained" color="primary" sx={{borderRadius: 4}}
+                  <Typography variant="body2" sx={{fontFamily:"Roboto", textAlign:"center"}}>Após o pagamento, você receberá um email confirmando sua inscrição.</Typography>
+                  <Button variant="contained" color="primary" sx={{borderRadius: 4, mt:2}}
                   onClick={() => {navigator.clipboard.writeText(qrCode), setSnackbarOpen(true)}}>
                         Copiar PIX
                   </Button>
+                </Box>                
+              )
+              : pagamentoAprovado ? (
+                <Box> <Typography variant="h2"> Deu certo  </Typography></Box>
+              )
+              :
+              (
+                <div> Deu errado</div>
+              )
+            
 
-
-
-                </Box>
-
-                
-              )}
-              
-              
+            }
             </Box>
             
             )}
@@ -232,26 +247,14 @@ function CadastroEquipes() {
           justifyContent: currentStep === steps.length - 1 ? "center" : "space-between"
            , mt: 2 , paddingX: { xs: 1, sm: 2, md: 5 },}}>
           {currentStep < steps.length - 1 && (
-            <Button  variant="contained"  disabled={currentStep === 0} onClick={handlePrevious} sx={{
-              backgroundColor: '#1976d2',   // cor de fundo
-              color: '#fff',                // cor do texto
-              '&:hover': {
-                backgroundColor: '#115293', // cor no hover
-              },
-            }}>
+            <Button  variant="contained"  disabled={currentStep === 0} onClick={handlePrevious} >
             Anterior
           </Button>
           )}
           
 
           {currentStep < steps.length - 2 ? (
-            <Button type= "submit" variant="contained" color="blue"   sx={{
-              backgroundColor: '#1976d2',   // cor de fundo
-              color: '#fff',                // cor do texto
-              '&:hover': {
-                backgroundColor: '#115293', // cor no hover
-              },
-            }} >
+            <Button type= "submit" variant="contained" >
               Próximo
             </Button>
           ) : currentStep === steps.length - 2 ? (
@@ -263,11 +266,10 @@ function CadastroEquipes() {
               Gerar QR Code PIX
             </Button> 
 
-          ) : (
-            <div>
-
-            </div>
-          )}
+          ):(
+            <div></div>
+          )
+          }
         </Box>
       </Paper>
 

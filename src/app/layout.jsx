@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
       <head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
         <ThemeRegistry>
