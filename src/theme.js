@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { fontFamily, margin, positions, width } from '@mui/system';
+import { fontFamily, height, margin, positions, width } from '@mui/system';
 import '@fontsource/roboto'
 import "@fontsource/russo-one"
 
@@ -50,6 +50,7 @@ const theme = createTheme({
       defaultProps: {
         variant: 'outlined',
         margin: 'dense',
+        
         
         fullWidth: true,
         

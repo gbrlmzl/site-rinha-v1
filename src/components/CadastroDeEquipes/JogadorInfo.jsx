@@ -148,7 +148,8 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                             id="player-email" 
                             name="emailContato" 
                             value={dataEquipe.emailContato}
-                            type="email" 
+                            type="email"
+                            required 
                             label="Email para contato" 
                             onChange={handleChange} 
                             fullWidth

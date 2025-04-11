@@ -16,7 +16,8 @@ import "@fontsource/roboto";
 import { set } from "react-hook-form";
 
 
-const steps = ["Informações da equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)", "Confirmação","Pagamento"];
+const formTitles = ["Informações da equipe", "Jogador 1 (Capitão)", "Jogador 2", "Jogador 3", "Jogador 4", "Jogador 5", "Jogador 6 (Opcional)", "Confirmação","Pagamento"];
+const steps = ["Informações da equipe", "Jogadores", "Confirmação", "Pagamento"];
 
 
 
@@ -64,6 +65,15 @@ function CadastroEquipes() {
     }
     return true;
   };
+
+  const convertStep = () => {
+    if(currentStep === 0) return 0; // Equipe
+    if(currentStep >= 1 && currentStep <= 6) return 1; // Jogadores
+    if(currentStep === 7) return 2; // Confirmação
+    if(currentStep === 8) return 3; // Pagamento
+    return -1; // Valor padrão, caso não corresponda a nenhum passo
+
+  }
 
 
   
@@ -130,25 +140,6 @@ function CadastroEquipes() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarCpfErrorOpen, setSnackbarCpfErrorOpen] = useState(false); // Snackbar para erro de CPF
 
-  const enviarDadosParaAPI = async () => {
-    try {
-      const response = await fetch("", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ equipe, jogadores }),
-      });
-
-      if (response.ok) {
-        setSnackbarOpen(true);
-      } else {
-        console.error("Erro ao enviar:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Erro:", error);
-    }
-  };
-
-
   return (
     <Box component="form" onSubmit={handleNext} autoComplete="off" sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color:"white", fontFamily: "Russo One"}}>
@@ -160,7 +151,7 @@ function CadastroEquipes() {
 
         {/* Stepper para indicar progresso */}
         <Box ref={stepperRef}  sx={{ overflowX: "auto", maxWidth: "100%" }}>
-          <Stepper activeStep={currentStep} alternativeLabel sx={{margin: "0 auto",
+          <Stepper activeStep={convertStep()} alternativeLabel sx={{margin: "0 auto",
             maxWidth: "100%",
             margin: "0 auto",
             //paddingX: { xs: 1, sm: 2, md: 3 }, // Ajusta o espaçamento horizontal
@@ -195,7 +186,7 @@ function CadastroEquipes() {
             />
           ) : currentStep >= 1 && currentStep <=6 ?(
             <JogadorInfo
-              formTitle={steps[currentStep]}
+              formTitle={formTitles[currentStep]}
               data={jogadores[currentStep - 1]}
               onSave={(value) => jogadorTemporario.current = value}
               posicaoIcon={defaultPosicaoIcon[currentStep - 1]}
@@ -207,7 +198,7 @@ function CadastroEquipes() {
           ) : currentStep === 7 ?(
             <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview} aceita={aceitaTermos} onAceitaTermos={handleAceitaTermosChange}/>
             
-          ): (
+          ): ( //ARRUMAR ESTA PICA
             <Box sx={{ minHeight: 300, display: "flex", justifyContent: "center", alignItems: "center" }}>
               {loading ? (
                 <CircularProgress size={60}/>
@@ -244,24 +235,24 @@ function CadastroEquipes() {
 
         {/* Botões de navegação */}
         <Box sx={{ display: "flex", 
-          justifyContent: currentStep === steps.length - 1 ? "center" : "space-between"
+          justifyContent: currentStep === formTitles.length - 1 ? "center" : "space-between"
            , mt: 2 , paddingX: { xs: 1, sm: 2, md: 5 },}}>
-          {currentStep < steps.length - 1 && (
+          {currentStep < formTitles.length - 1 && (
             <Button  variant="contained"  disabled={currentStep === 0} onClick={handlePrevious} >
             Anterior
           </Button>
           )}
           
 
-          {currentStep < steps.length - 2 ? (
+          {currentStep < formTitles.length - 2 ? (
             <Button type= "submit" variant="contained" >
               Próximo
             </Button>
-          ) : currentStep === steps.length - 2 ? (
+          ) : currentStep === formTitles.length - 2 ? (
             <Button variant="contained" color="success" onClick={handleNext} disabled={!aceitaTermos} >
               Pagamento
             </Button>
-          ) : currentStep === steps.length - 1 && !qrCodeGerado ? (
+          ) : currentStep === formTitles.length - 1 && !qrCodeGerado ? (
             <Button type= "submit" variant="contained" color="success" disabled={loading}>
               Gerar QR Code PIX
             </Button> 

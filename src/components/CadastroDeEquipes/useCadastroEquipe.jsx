@@ -28,6 +28,10 @@ export const useCadastroEquipe = () => {
   const [qrCodeGerado, setQrCodeGerado] = useState(false); // estado de QR Code gerado
   const [aceitaTermos, setAceitaTermos] = useState(false); // estado de aceitação dos termos
   const [pagamentoAprovado, setPagamentoAprovado] = useState(false); // estado de pagamento aprovado
+  const [uuidPagamento, setUuidPagamento] = useState(null);
+
+  
+
   
   
   
@@ -83,14 +87,17 @@ export const useCadastroEquipe = () => {
       });
 
       const dataPagamento = await response.json();
-
+   
       if (dataPagamento.qrCodeBase64 && dataPagamento.qrCode) {
         setQrCodeBase64(`data:image/png;base64,${dataPagamento.qrCodeBase64}`);
         setQrCode(dataPagamento.qrCode); // Atualiza o estado com o QR Code
         setQrCodeGerado(true); // Atualiza o estado indicando que o QR Code foi gerado
+        setUuidPagamento(dataPagamento.uuid); // isso ativa o hook acima
+        
+        
         
 
-        usePagamentoListener(dataPagamento.uuid, onPagamentoAprovado); // Chama o listener para o UUID gerado
+        //usePagamentoListener(dataPagamento.uuid, onPagamentoAprovado); ==>> ERROU AQUI <<==
 
       } else {
         console.error("Erro ao gerar QR Code:", dataPagamento);
@@ -101,48 +108,47 @@ export const useCadastroEquipe = () => {
       setLoading(false);
     }
   };
+  
+  
 
+  useEffect(() => {
+    if (!uuidPagamento) return;
+  
+    const stompClientRef = { current: null }; // simples objeto ref local
+  
+    const socket = new SockJS("http://localhost:8080/ws");
+    const client = new Client({
+      webSocketFactory: () => socket,
+      reconnectDelay: 5000,
+      onConnect: () => {
+        console.log("Conectado ao WebSocket");
+  
+        client.subscribe(`/topic/pagamentos/${uuidPagamento}`, (message) => {
+          const body = JSON.parse(message.body);
+          console.log("Mensagem recebida:", body);
+  
+          if (body.status === "PAGAMENTO REALIZADO") {
+            console.log("Pagamento aprovado:", body);
+            onPagamentoAprovado();
+          }
+        });
+      },
+      onDisconnect: () => console.log("Desconectado do WebSocket"),
+      debug: (str) => console.log(str),
+    });
+  
+    client.activate();
+    stompClientRef.current = client;
+  
+    return () => {
+      if (stompClientRef.current) {
+        stompClientRef.current.deactivate();
+      }
+    };
+  }, [uuidPagamento]);
+  
 
-  const usePagamentoListener = (uuid, onPagamentoAprovado) => {
-    const stompClientRef = useRef(null);
   
-    useEffect(() => {
-      if (!uuid) return;
-  
-      const socket = new SockJS("http://localhost:8080/ws"); // endpoint do STOMP configurado no seu back
-      const client = new Client({
-        webSocketFactory: () => socket,
-        reconnectDelay: 5000,
-        onConnect: () => {
-          console.log("Conectado ao WebSocket");
-  
-          // Inscreve no canal específico do UUID
-          client.subscribe(`/topic/pagamento/${uuid}`, (message) => {
-            const body = JSON.parse(message.body);
-            console.log("Mensagem recebida:", body);
-  
-            if (body.status === "PAGAMENTO REALIZADO") {
-              console.log("Pagamento aprovado:", body);
-              onPagamentoAprovado(); // Chama a função de callback passando o body
-              
-              
-            }
-          });
-        },
-        onDisconnect: () => console.log("Desconectado do WebSocket"),
-        debug: (str) => console.log(str), // remover em produção
-      });
-  
-      client.activate();
-      stompClientRef.current = client;
-  
-      return () => {
-        if (stompClientRef.current) {
-          stompClientRef.current.deactivate();
-        }
-      };
-    }, [uuid, onPagamentoAprovado]);
-  };
 
   const onPagamentoAprovado = () => {
     setQrCodeGerado(false); // Reseta o QR Code gerado
