@@ -1,4 +1,3 @@
-
 import { Box } from '@mui/system';
 import CadastroEquipes from '../../components/CadastroDeEquipes/CadastroEquipes';
 import Header from '../../components/Navbar/Header'; 

@@ -1,7 +1,5 @@
-// app/layout.jsx
-import './reset.css';
-import './globals.css';
 import ThemeRegistry from './theme-provider';
+import {AppRouterCacheProvider}  from '@mui/material-nextjs/v15-appRouter'; 
 
 export const metadata = {
   title: 'Rinha do Campus IV',
@@ -16,9 +14,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-        <ThemeRegistry>
-          {children}
-        </ThemeRegistry>
+        <AppRouterCacheProvider options={{ key: 'css' }}>
+          <ThemeRegistry>
+            {children}
+          </ThemeRegistry>
+        </AppRouterCacheProvider>
+        
       </body>
     </html>
   );

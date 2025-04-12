@@ -1,3 +1,4 @@
+'use client';
 import { createTheme } from '@mui/material/styles';
 import { fontFamily, height, margin, positions, width } from '@mui/system';
 import '@fontsource/roboto'
