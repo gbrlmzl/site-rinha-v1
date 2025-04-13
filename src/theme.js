@@ -112,7 +112,7 @@ const theme = createTheme({
       },
     },
     typography: {
-      fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+      fontFamily: "Roboto",
       fontSize: 14,
       h1: {
         fontSize: '2rem',
@@ -136,11 +136,22 @@ const theme = createTheme({
         fontFamily: 'Russo One',
         fontWeight: 700,
       },
+      title2:{
+        fontSize: "1.25rem",
+        fontFamily: 'Roboto',
+        fontWeight: 700,
+
+      },
       text1:{
         fontSize: '1rem',
-        fontFamily: 'Russo One',
+        fontFamily: "Roboto",
         fontWeight: 400,
-      }
+      },
+      text2:{
+        fontSize: '0.875rem',
+        fontFamily: "Roboto",
+        fontWeight: 400,
+      },
 
     },
     Link: {

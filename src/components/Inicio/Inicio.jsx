@@ -34,9 +34,9 @@ function Inicio() {
           
         
       </Box>
-      <SegundaEdicaoInfo />
+      
       <Box>
-       
+        <SegundaEdicaoInfo />
       </Box>
 
     </Box>

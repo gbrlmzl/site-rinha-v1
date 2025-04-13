@@ -48,7 +48,7 @@ function ResponsiveAppBar() {
             <Box sx={{display: { xs: 'none', md: 'flex' }, justifyContent: "center", alignItems: "center"}}> {/* Alinha o conteúdo do Toolbar para ocupar todo o espaço disponível */}
               <Link href="/" style={{textDecoration:"none"}}>
                 <IconButton  sx={{ mr: 1 }}> {/* Desativar sombreamento de clique e colocar um Onclick*/}
-                      <Image src={rinhaLogo} alt="" width={60} height={60} />
+                      <Image src={rinhaLogo} alt="Logo da Rinha do Campus IV" width={60} height={60} />
                 </IconButton>
               </Link>
             </Box>
@@ -112,7 +112,7 @@ function ResponsiveAppBar() {
             {/*<AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />*/}
             <IconButton  sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }}>
                   <Link href={"/"} style={{ textDecoration: 'none'}}>
-                    <Image src={rinhaLogo} alt="" width={55} height={55} />
+                    <Image src={rinhaLogo} alt="Logo da Rinha do Campus IV" width={55} height={55} />
                   </Link>
             </IconButton>
             
@@ -120,7 +120,7 @@ function ResponsiveAppBar() {
             <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2, justifyContent:"center"   }}>{/*Menu NAVBAR para telas maiores*/}
               <Link href="/" style={{ textDecoration: 'none'}}>
                 <Button
-                  sx={{my: 2, color: 'white', display: 'block', gap: 2, fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
+                  sx={{my: 2, color: 'white', display: 'block', gap: 2, fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 
                 >
                   Início
                 </Button>
@@ -128,21 +128,21 @@ function ResponsiveAppBar() {
               
               <Link href="inscricoes" style={{ textDecoration: 'none'}}>
                 <Button
-                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
+                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 
                 >
                   Inscrição
                 </Button>
               </Link>
               <Link href="regulamento" style={{ textDecoration: 'none'}}>
                 <Button
-                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
+                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 
                 >
                   Regulamento
                 </Button>
               </Link>
               <Link href="sobre" style={{ textDecoration: 'none'}}>
                 <Button
-                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#FF0A0A"}}} 
+                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 
                 >
                   Sobre
                 </Button>
