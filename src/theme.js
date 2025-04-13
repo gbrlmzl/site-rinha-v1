@@ -3,6 +3,7 @@ import { createTheme } from '@mui/material/styles';
 import { fontFamily, height, margin, positions, width } from '@mui/system';
 import '@fontsource/roboto'
 import "@fontsource/russo-one"
+import "@fontsource/poppins"
 
 
 const theme = createTheme({
@@ -141,6 +142,17 @@ const theme = createTheme({
         fontWeight: 400,
       }
 
+    },
+    Link: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: '#0051E6',
+          '&:hover': {
+            textDecoration: 'underline',
+          },
+        },
+      },
     },
     
     

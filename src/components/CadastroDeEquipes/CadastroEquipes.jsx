@@ -198,40 +198,21 @@ function CadastroEquipes() {
           ) : currentStep === 7 ?(
             <ConfirmacaoDadosEquipe dataEquipe={equipe} dataJogadores={jogadores} escudoPreview={imagePreview} aceita={aceitaTermos} onAceitaTermos={handleAceitaTermosChange}/>
             
-          ): ( //ARRUMAR ESTA PICA
-            <Box sx={{ minHeight: 300, display: "flex", justifyContent: "center", alignItems: "center" }}>
-              {loading ? (
-                <CircularProgress size={60}/>
-              ): !qrCodeGerado ? (
-                <Pagamento valor={valorDaInscricao()} data={formPagamento} onChange={handleFormPagamentoChange} />
-              ): qrCodeGerado && !pagamentoAprovado ?( 
-                <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", flexDirection:"column", gap:1, paddingTop: 1}}>
-                  <Image src={pixLogo} width={125} height={"auto"} alt="Logo do Pix"></Image>
-                  <Card sx={{width: 200, height: 200, display: "flex", justifyContent: "center", alignItems: "center", }}>
-                    <Image src={qrCodeBase64} width={200} height={200} alt="QR Code"></Image>
-                  </Card>
-                  <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valorDaInscricao()}</Typography>
-                  <Typography variant="body2" sx={{fontFamily:"Roboto", textAlign:"center"}}>Após o pagamento, você receberá um email confirmando sua inscrição.</Typography>
-                  <Button variant="contained" color="primary" sx={{borderRadius: 4, mt:2}}
-                  onClick={() => {navigator.clipboard.writeText(qrCode), setSnackbarOpen(true)}}>
-                        Copiar PIX
-                  </Button>
-                </Box>                
-              )
-              : pagamentoAprovado ? (
-                <Box> <Typography variant="h2"> Deu certo  </Typography></Box>
-              )
-              :
-              (
-                <div> Deu errado</div>
-              )
-            
+          ): (
+            <Pagamento
+              formTitle={formTitles[currentStep]}
+              data={formPagamento}
+              onChange={handleFormPagamentoChange}
+              valor={valorDaInscricao()}
+              qrCodeGerado={qrCodeGerado}
+              qrCode={qrCode}
+              qrCodeBase64={qrCodeBase64}
+              loading={loading}
+              pagamentoAprovado={pagamentoAprovado}
+              />
 
-            }
-            </Box>
-            
             )}
-        </Box>
+        </Box>{/*box final do conteudo do formulario*/}
 
         {/* Botões de navegação */}
         <Box sx={{ display: "flex", 
