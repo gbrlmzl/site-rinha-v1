@@ -11,6 +11,7 @@ import DefaultIconPosition from "../../assets/icons/DefaultIcon.svg"; // Ícone 
 import { useEffect, useRef } from "react";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import { set } from "react-hook-form";
 
 
 
@@ -34,8 +35,19 @@ export const useCadastroEquipe = () => {
 
   
   
+  const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  };
   
-  
+  const atualizarEscudoEquipe = (escudoBase64) => {
+    setEquipe((prev) => ({ ...prev, escudo: escudoBase64 })); // Atualiza o estado da equipe com o arquivo de imagem
+  }
+
   const valorDaInscricao = () => {
     const valorBase = 1; // Valor base da inscrição
     const numeroJogadoresEquipe = jogadores.filter((jogador) => jogador.disabledPlayer === false).length; // Conta os jogadores que não estão desabilitados (disabledPlayer === false)
@@ -171,8 +183,15 @@ export const useCadastroEquipe = () => {
     });
   };
 
-  const handleImagePreviewChange = (file) => {
-    setImagePreview(URL.createObjectURL(file)); // Atualiza o estado com a URL do arquivo
+  const handleImagePreviewChange = async (file) => {
+    try {
+      const base64String = await convertToBase64(file);
+      setImagePreview(URL.createObjectURL(file)); // Atualiza a pré-visualização
+      atualizarEscudoEquipe(base64String); // Atualiza o estado com a string Base64
+      console.log("Escudo atualizado:", base64String); // Log para verificar o valor
+    } catch (error) {
+      console.error("Erro ao converter a imagem para Base64:", error);
+    }
   };
 
   const handlePosicaoIconChange = (value, jogadorIndex) => {

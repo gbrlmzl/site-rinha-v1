@@ -7,7 +7,8 @@ import rinhaLogoEdicao from '../../assets/imgs/rinhaLogoEdicao.svg';
 import Image from "next/image";
 import { LinearScale } from "@mui/icons-material";
 import Link from "next/link";
-import "@fontsource/russo-one"
+
+
 
 function InfoBox(){
     return(
@@ -27,18 +28,25 @@ function InfoBox(){
           <Typography variant="title" gutterBottom sx={{ fontSize:"1.3rem", textAlign:"center"}} component="div">
             A SEGUNDA EDIÇÃO VEM AÍ...
           </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', mb: 2 }}>
           <Typography variant="text1" sx={{ color: 'text.secondary' }}>
-            A Rinha do Campus IV está de volta! Prepare-se para mais uma edição cheia de diversão, competição e muitas risadas. 
-            <br /> 
-            <br />
-            Em breve, mais informações sobre a data e as inscrições!
-
+            Meus amigos, em novembro do ano passado tivemos a primeira edição da Rinha do Campus IV, e apesar
+            de alguns contratempos, conseguimos realizar um torneio muito massa.
           </Typography>
+          <Typography>
+            Preencher isso
+          </Typography>
+
+
+          </Box>
+          
         </CardContent>
         <CardActions sx={{display:"flex", justifyContent:"center"}} >
           <Button sx={{backgroundColor:"cyan", color:"#000000", fontSize: {xs: "1rem", md:"1rem"}}}>
-          <Link href="/inscricoes" style={{ textDecoration: "none", color: "inherit" }}>
-                Mais informações
+          <Link href="/regulamento" style={{ textDecoration: "none", color: "inherit" }}>
+                <Typography fontFamily={"Poppins"}>
+                  CONFIRA O REGULAMENTO
+                </Typography>
           </Link>
 
           </Button>

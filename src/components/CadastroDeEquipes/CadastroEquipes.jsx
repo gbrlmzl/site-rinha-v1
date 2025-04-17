@@ -142,7 +142,7 @@ function CadastroEquipes() {
 
   return (
     <Box component="form" onSubmit={handleNext} autoComplete="off" sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 3, color:"white", fontFamily: "Russo One"}}>
+      <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 2, color:"white", fontFamily: "Russo One", py:3}}>
           Cadastro de Equipe
       </Typography>
       <Container maxWidth="md" sx={{paddingBottom: 3 }}>

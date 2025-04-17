@@ -1,11 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Box, Button, TextField, Typography, Grid, Card, CardMedia, Input } from "@mui/material";
-import { CloudUpload } from "@mui/icons-material";
-import { color, fontFamily, fontWeight, styled } from "@mui/system";
-import '@fontsource/russo-one';
-import "@fontsource/archivo-black";
-import '@fontsource/roboto' // Peso padrão (400)
+import { Box, Button, TextField, Typography, Grid, Card, CardMedia } from "@mui/material";
+import { styled } from "@mui/system";
 import UploadIcon from '@mui/icons-material/Upload';
 
 
@@ -47,20 +43,20 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
 
       <Grid container spacing={2} justifyContent="center" flexDirection={"column"}>
         {/* Escudo da equipe */}
-        <Grid item xs={12} display="flex" justifyContent="center">
+        <Grid  size={{ xs: 12}} display="flex" justifyContent="center">
           <Card sx={{ width: 200, height: 200, display: "flex", justifyContent: "center", alignItems: "center", boxShadow: 3 }}>
             {escudoPreview ? (
               <CardMedia component="img" image={escudoPreview} alt="Escudo da equipe" sx={{ width: "100%", height: "100%", objectFit: "contain" }} />
             ) : (
-              <Typography variant="body2" color="textSecondary" align="center" >
-                Ideal: PNG 200x200
+              <Typography variant="body1" color="textSecondary" align="center" >
+                Escudo
               </Typography>
             )}
           </Card>
         </Grid>
 
         {/* Botão de Upload */}
-        <Grid item xs={12} display="flex" justifyContent="center" alignItems={"center"}>
+        <Grid  size={{ xs: 12 }} display="flex" justifyContent="center" alignItems={"center"}>
           <Button component="label" variant="contained" /*startIcon={<CloudUpload />}*/color="primary" >
            <Typography sx={{marginRight:1}}>Escudo</Typography><UploadIcon width={40} height={40} ></UploadIcon>
             <VisuallyHiddenInput type="file" accept="image/*" onChange={handleImageUpload} />
@@ -68,7 +64,7 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
         </Grid>
 
         {/* Input do Nome da Equipe */}
-        <Grid autoComplete="off" item xs={12}>
+        <Grid autoComplete="off"  size={{ xs: 12 }}>
           <TextField
             fullWidth
             placeholder="Nome da Equipe"

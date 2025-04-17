@@ -4,7 +4,7 @@ import SegundaEdicaoInfo from './SegundaEdicaoInfo';
 import "@fontsource/archivo-black"; // Import the font from @fontsource
 
 import { Box } from '@mui/system';
-import { Typography, Paper } from '@mui/material';
+import { Typography} from '@mui/material';
 
 
 function Inicio() {
@@ -15,11 +15,11 @@ function Inicio() {
         flexDirection: {xs: 'column', md: 'column'},
         justifyContent: 'center',
         alignItems: 'center',
-        bgcolor: '#000000',
+        //bgcolor: '#000000',
         flexGrow: 1,
         width: '100%',
         minHeight: '100%',
-        pt: 3,
+        py: 3,
         px: {xs : 1, md: 5, lg: 10},
         gap:5
         
@@ -27,8 +27,8 @@ function Inicio() {
     >
       <Box sx={{display: 'flex', justifyContent:"center", alignItems: 'center', width:"100%", px: {xs: 1, md: 5, lg: 10},}}>
         
-          <Typography  sx={{fontFamily:"Rancho", fontSize:"1.5rem", color:"white", textAlign:"center" }}>
-            Reunindo as maiores doenças do Campus IV desde 2024
+          <Typography  sx={{fontFamily:"Russo One", fontSize:"1.5rem", color:"white", textAlign:"center" }}>
+            A maior fonte de entretenimento do Campus IV 
             
           </Typography>
           

@@ -40,7 +40,7 @@ function ResponsiveAppBar() {
   return (
     <AppBar position="sticky" sx={{backgroundColor: "#0E1241", borderBottom: "2px solid rgb(208, 45, 241)"}}> {/* Define propriedades do AppBar */}
       
-      <Container maxWidth="xl" sx={{ px: {xs: 1, md: 0}, py:{xs: 0.125, md: 0}, m: 0 }}>
+      <Container maxWidth="xl" sx={{ px: {xs: 1, md: 0}, py:{xs: 0.125, md: 0}, justifyContent: "center"}}> {/* Define propriedades do Container */}
 
         <Toolbar disableGutters sx={{display: "flex", justifyContent: "center"}} > {/* Alinha o conteúdo do Toolbar para ocupar todo o espaço disponível */}
           <Box sx={{display: 'flex', width:{xs:"100%", md:"75vw"}, justifyContent:"space-between",   }}> {/* Alinha o conteúdo do Toolbar para ocupar todo o espaço disponível */}
