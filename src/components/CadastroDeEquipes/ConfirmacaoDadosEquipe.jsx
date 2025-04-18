@@ -24,7 +24,7 @@ import {FaDiscord} from "react-icons/fa";
 function TelaConfirmacao({ dataEquipe, dataJogadores, escudoPreview,aceita, onAceitaTermos  }) {
   return (
     <Box>
-      {aceita &&(console.log(dataEquipe.escudo))}
+      
       <Container maxWidth="md">
         {/* Escudo e Nome da Equipe */}
         <Box sx={{ textAlign: "center", mb: 4 }}>

@@ -36,6 +36,7 @@ function CadastroEquipes() {
     loading,
     aceitaTermos,
     pagamentoAprovado,
+    valorPagamento,
 
     handleAceitaTermosChange,
     handleEquipeDataChange,
@@ -44,18 +45,14 @@ function CadastroEquipes() {
     handlePosicaoIconChange,
     handlePagamento,
     handleFormPagamentoChange,
+    handleConfirmaEscudo
 
   } = useCadastroEquipe();
 
   const jogadorTemporario = useRef(jogadores[currentStep - 1]);
   const stepperRef = useRef(null); // Referência para o contêiner do Stepper
 
-  const valorDaInscricao = () => {
-    const valorBase = 10; // Valor base da inscrição
-    const numeroJogadoresEquipe = jogadores.filter((jogador) => jogador.disabledPlayer === false).length; // Conta os jogadores que não estão desabilitados (disabledPlayer === false)
-    
-    return valorBase * numeroJogadoresEquipe; // Calcula o valor total da inscrição
-  }
+
 
   const validarForm = () => {
     const { cpf } = formPagamento;
@@ -97,8 +94,12 @@ function CadastroEquipes() {
     }
     currentStep !== 0 && currentStep <= 6 && handleJogadoresDataChange(jogadorTemporario.current, currentStep - 1);  //Atualiza os dados dos jogadores globalmente
 
+    if(currentStep === 7){
+      handleConfirmaEscudo(); // Chama a função para confirmar o escudo antes de prosseguir para o formulário de pagamento
+    }
+
     if (currentStep === 8) {
-      if(validarForm()){
+      if(validarForm()){ 
         handlePagamento();
       }else{
         setSnackbarCpfErrorOpen(true); // Abre snackbar de erro de CPF
@@ -203,7 +204,7 @@ function CadastroEquipes() {
               formTitle={formTitles[currentStep]}
               data={formPagamento}
               onChange={handleFormPagamentoChange}
-              valor={valorDaInscricao()}
+              valor={valorPagamento}
               qrCodeGerado={qrCodeGerado}
               qrCode={qrCode}
               qrCodeBase64={qrCodeBase64}
@@ -230,7 +231,7 @@ function CadastroEquipes() {
               Próximo
             </Button>
           ) : currentStep === formTitles.length - 2 ? (
-            <Button variant="contained" color="success" onClick={handleNext} disabled={!aceitaTermos} >
+            <Button variant="contained" color="success" onClick={handleNext} disabled={!aceitaTermos} > {/* Depois criar uma função separada handlePagamentoClick */}
               Pagamento
             </Button>
           ) : currentStep === formTitles.length - 1 && !qrCodeGerado ? (

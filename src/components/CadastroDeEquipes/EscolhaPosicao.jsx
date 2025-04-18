@@ -6,7 +6,7 @@ import JungleIcon from "../../assets/icons/Position-Jungle.png";
 import MidIcon from "../../assets/icons/Position-Mid.png";
 import ADCIcon from "../../assets/icons/Position-Bot.png";
 import SupportIcon from "../../assets/icons/Position-Support.png";
-import { height, margin, width } from "@mui/system";
+
 
 
 
@@ -114,31 +114,31 @@ function EscolhaPosicao({onChange, defaultIcon}) {
           p: {xs: 0.25, md: 1}, // Espaçamento interno dos itens do menu
           minWidth: {xs: 0, md: 0}, // Largura mínima dos itens do menu
           },  }} >
-          <MenuItem onClick={() => handleSelectPosicao("Top")}>
+          <MenuItem onClick={() => handleSelectPosicao("TOP_LANER")}>
             <Box sx={{ width: { xs: 35, md: 40 }, height: "auto", position: "relative" }}>
               <Image src={TopIcon} alt="Top" layout="responsive" width={40} height={40} />
             </Box>
           </MenuItem>
 
-          <MenuItem onClick={() => handleSelectPosicao("Selva")}>
+          <MenuItem onClick={() => handleSelectPosicao("JUNGLER")}>
             <Box sx={{ width: { xs: 35, md: 40 }, height: "auto", position: "relative" }}>
               <Image src={JungleIcon} alt="Selva" layout="responsive" width={40} height={40} />
             </Box>
           </MenuItem>
 
-          <MenuItem onClick={() => handleSelectPosicao("Meio")}>
+          <MenuItem onClick={() => handleSelectPosicao("MID_LANER")}>
             <Box sx={{ width: { xs: 35, md: 40 }, height: "auto", position: "relative" }}>
               <Image src={MidIcon} alt="Meio" layout="responsive" width={40} height={40} />
             </Box>
           </MenuItem>
 
-          <MenuItem onClick={() => handleSelectPosicao("Atirador")}>
+          <MenuItem onClick={() => handleSelectPosicao("AD_CARRY")}>
             <Box sx={{ width: { xs: 35, md: 40 }, height: "auto", position: "relative" }}>
               <Image src={ADCIcon} alt="Atirador" layout="responsive" width={40} height={40} />
             </Box>
           </MenuItem>
 
-          <MenuItem onClick={() => handleSelectPosicao("Suporte")}>
+          <MenuItem onClick={() => handleSelectPosicao("SUPPORT")}>
             <Box sx={{ width: { xs: 35, md: 40 }, height: "auto", position: "relative" }}>
               <Image src={SupportIcon} alt="Suporte" layout="responsive" width={40} height={40} />
             </Box>

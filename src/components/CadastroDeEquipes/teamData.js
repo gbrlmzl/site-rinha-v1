@@ -55,7 +55,7 @@ export const inicialJogadores = [
         "matricula" : "",
         "nickname" : "",
         "discordUser" : "",
-        "posicao" : "",
+        "posicao" : "FILL",
         "isExternalPlayer" : false,
         "disabledPlayer" : false,
 }							

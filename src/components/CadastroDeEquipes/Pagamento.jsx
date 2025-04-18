@@ -1,9 +1,12 @@
 "use client";
-import { Box, TextField, Button, Typography, CircularProgress } from "@mui/material";
+import { Box, TextField, Button, Typography, CircularProgress, Card } from "@mui/material";
+
+
 import "@fontsource/russo-one"
 import "@fontsource/rancho"
 import "@fontsource/roboto"
 import Image from "next/image";
+import pixLogo from "../../assets/imgs/pixLogo.svg"
 
 import siteSeguroBanner from "../../assets/imgs/siteSeguroBanner.svg"
 
@@ -38,7 +41,7 @@ const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCod
                 <Card sx={{width: 200, height: 200, display: "flex", justifyContent: "center", alignItems: "center", }}>
                   <Image src={qrCodeBase64} width={200} height={200} alt="QR Code"></Image>
                 </Card>
-                <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valorDaInscricao()}</Typography>
+                <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valor}</Typography>
                 <Typography variant="body2" sx={{fontFamily:"Roboto", textAlign:"center"}}>Após o pagamento, você receberá um email confirmando sua inscrição.</Typography>
                 <Button variant="contained" color="primary" sx={{borderRadius: 4, mt:2}}
                 onClick={() => {navigator.clipboard.writeText(qrCode), setSnackbarOpen(true)}}>
