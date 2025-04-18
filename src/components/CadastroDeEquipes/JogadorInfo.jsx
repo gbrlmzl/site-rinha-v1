@@ -48,9 +48,9 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
             ...prev,
             disabledPlayer: newDisabledPlayer,
             matricula: newDisabledPlayer ? "" : prev.matricula, // Limpa a matrícula se o jogador for desabilitado
-            nomeJogador: newDisabledPlayer ? "disabledPlayer" : prev.nomeJogador, // Limpa o nome se o jogador for desabilitado
-            nickname: newDisabledPlayer ? "disabledPlayer" : prev.nickname, // Limpa o nickname se o jogador for desabilitado
-            discordUser: newDisabledPlayer ? "disabledPlayer" : prev.discordUser, // Limpa o Discord se o jogador for desabilitado
+            nomeJogador: newDisabledPlayer ? "" : prev.nomeJogador, // Limpa o nome se o jogador for desabilitado
+            nickname: newDisabledPlayer ? "" : prev.nickname, // Limpa o nickname se o jogador for desabilitado
+            discordUser: newDisabledPlayer ? "" : prev.discordUser, // Limpa o Discord se o jogador for desabilitado
             isExternalPlayer: newDisabledPlayer ? false : prev.isExternalPlayer, // Reseta o jogador externo se o jogador for desabilitado
             posicao: newDisabledPlayer ? "FILL" : prev.posicao, // Limpa a posição se o jogador for desabilitado
             

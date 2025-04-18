@@ -69,7 +69,7 @@ export const useCadastroEquipe = () => {
       const response = await fetch('https://api.imgur.com/3/image', {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer token ID', // Substitua pelo seu token de acesso do Imgur
+          Authorization: 'Bearer ${imgurToken}',
         },
         body: formData,
       });
