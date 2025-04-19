@@ -1,6 +1,6 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
-import { fontFamily, height, margin, positions, width } from '@mui/system';
+import { color, fontFamily, height, margin, positions, width } from '@mui/system';
 import '@fontsource/roboto'
 import "@fontsource/russo-one"
 import "@fontsource/poppins"
@@ -145,12 +145,18 @@ const theme = createTheme({
       text1:{
         fontSize: '1rem',
         fontFamily: "Roboto",
-        fontWeight: 400,
+        fontWeight: 500,
       },
       text2:{
         fontSize: '0.875rem',
-        fontFamily: "Roboto",
+        fontFamily: "Poppins",
         fontWeight: 400,
+      },
+      text2White:{
+        fontSize: '0.875rem',
+        fontFamily: "Poppins",
+        fontWeight: 400,
+        color: "#ffffff",
       },
 
     },

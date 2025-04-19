@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import rinhaLogoEdicao from '../../assets/imgs/rinhaLogoEdicao.svg';
 import SegundaEdicaoInfo from './SegundaEdicaoInfo';
-import "@fontsource/archivo-black"; // Import the font from @fontsource
+
+import programacaoTorneio from "../../assets/imgs/programacaoTorneio.svg"; 
 
 import { Box } from '@mui/system';
-import { Typography} from '@mui/material';
+import { Card, Typography} from '@mui/material';
 
 
 function Inicio() {
@@ -28,7 +29,7 @@ function Inicio() {
       <Box sx={{display: 'flex', justifyContent:"center", alignItems: 'center', width:"100%", px: {xs: 1, md: 5, lg: 10},}}>
         
           <Typography  sx={{fontFamily:"Russo One", fontSize:"1.5rem", color:"white", textAlign:"center" }}>
-            A maior fonte de entretenimento do Campus IV 
+            Bem-vindos ao site da maior fonte de entretenimento do Campus IV 
             
           </Typography>
           
@@ -38,6 +39,11 @@ function Inicio() {
       <Box>
         <SegundaEdicaoInfo />
       </Box>
+
+      <Card sx={{display:"flex", alignContent:"center" ,p:{xs: 0.5, md: 1}, mt: 4, background: "#11B5E4",/*background:"linear-gradient(to right, #11B5E4,rgb(255, 252, 253))"*/ width: {xs: "100%", md: "80vw"}, maxWidth: "1000px", mx:"auto"}}>
+        <Image src={programacaoTorneio} alt='Programação do torneio' style={{height: "auto", width: "100%"}}></Image>
+
+      </Card>
 
     </Box>
 

@@ -3,6 +3,9 @@ import { Box } from "@mui/system";
 import {Paper} from "@mui/material";
 import Image from "next/image";
 import rinhaLogo from "../../assets/imgs/rinhaTitleLogo.svg";
+import Link from "next/link";
+
+import calendarioFaseFinal from "../../assets/imgs/calendarioFaseFinal.svg";
 
 const Regulamento = () => {
   return (
@@ -149,8 +152,12 @@ const Regulamento = () => {
                     Fase Eliminatória:
                   </Typography>
                   <Typography variant="text2" sx={{ml: 3}}>
-                    
+                    A fase eliminatória será disputada em md1, com a final da chave inferior e a grande final sendo disputadas em md3. 
                   </Typography>
+                  <Typography variant="text2" sx={{ml: 3}}>
+                    Confira o calendário da fase final <Link href={"/regulamento/fasefinal"}>aqui</Link>.
+                  </Typography>
+                  
 
                   <Typography variant="text2">
 
@@ -178,7 +185,7 @@ const Regulamento = () => {
                     ● Problemas físicos que dificultam o jogador (ex.: cadeira quebrada).
                   </Typography>
                   <Typography variant="text2">
-                  3. Caso os 10 minutos de pausa sejam insuficientes, o capitão pode solicitar mais tempo aos organizadores, mas a decisão será tomada pelos oficiais do torneio. Casoa pausa adicional não seja concedida, a equipe deve continuar o jogo da melhor forma possível.
+                  3. Caso os 10 minutos de pausa sejam insuficientes, o capitão pode solicitar mais tempo aos organizadores, mas a decisão será tomada pelos oficiais do torneio. Caso a pausa adicional não seja concedida, a equipe deve continuar o jogo da melhor forma possível.
                   </Typography>
                   <Typography variant="text2" >
                   4. Pausa não autorizada: Se um jogador pausar a partida sem permissão ou não retomar o jogo após a ordem oficial, ele será penalizado de acordo com as regras do torneio.

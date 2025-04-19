@@ -79,31 +79,34 @@ function ResponsiveAppBar() {
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
-                sx={{ display: { xs: 'block', md: 'none' }  }}
+                sx={{ display: { xs: 'block', md: 'none' } }} // Define propriedades do menu para telas menores
+                slotProps={{list:{sx:{py:0, background:"#11B5E4"}}}}//controla as propriedades do menu
+               
+
               >
               
 
                 <MenuItem key={"inicio"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
                   <Link href="/" style={{ textDecoration: 'none'}}>
-                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#000000'>Início</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Início</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                   </Link>
                 </MenuItem>
 
                 <MenuItem key={"inscricoes"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
                   <Link href="/inscricoes" style={{ textDecoration: 'none'}}>
-                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#000000'>Inscrição</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Inscrição</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                   </Link>
                 </MenuItem>
 
                 <MenuItem key={"regulamento"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
                   <Link href="/regulamento" style={{ textDecoration: 'none'}}>
-                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#000000'>Regulamento</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Regulamento</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                   </Link>
                 </MenuItem>
 
                 <MenuItem key={"sobre"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
                   <Link href="/sobre" style={{ textDecoration: 'none'}}>
-                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#000000'>Sobre</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Sobre</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                   </Link>
                   
                 </MenuItem>

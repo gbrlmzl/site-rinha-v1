@@ -36,9 +36,7 @@ export const useCadastroEquipe = () => {
   
 
   const handleConfirmaEscudo = async () => {
-    console.log("Confirmando escudo..."); // Log de confirmação do escudo
     if (!imagePreviewFile) {
-      console.log("é isso")
       return; 
     }
     setLoading(true); // Inicia o carregamento
@@ -69,7 +67,7 @@ export const useCadastroEquipe = () => {
       const response = await fetch('https://api.imgur.com/3/image', {
         method: 'POST',
         headers: {
-          Authorization: 'Bearer ${imgurToken}',
+          Authorization: `Bearer ${imgurToken}`,
         },
         body: formData,
       });
@@ -124,16 +122,20 @@ export const useCadastroEquipe = () => {
  
 
 
-
+ 
 
   const handlePagamento = async () => {
     if (loading) return; // Impede execução se já estiver carregando
     setLoading(true);
     setQrCodeBase64(null); // limpa QR antigo
 
+    
+
+    const jogadoresAtivos = jogadores.filter(jogador => !jogador.disabledPlayer);
+
     const dadosEquipe = {
       ...equipe,
-      jogadores, // jogadores já é um array de objetos
+      jogadores: jogadoresAtivos, // Filtra jogadores ativos
     };
 
     const dadosPagamento = {
@@ -142,6 +144,7 @@ export const useCadastroEquipe = () => {
       email: formPagamento.email,
       cpf: formPagamento.cpf,
     };
+    
 
     try {
       const response = await fetch("http://localhost:8080/inscricoes", {
@@ -152,6 +155,7 @@ export const useCadastroEquipe = () => {
           dadosPagamento,
         }),
       });
+      
 
       const dataPagamento = await response.json();
    

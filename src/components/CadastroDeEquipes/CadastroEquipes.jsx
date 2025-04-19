@@ -51,6 +51,11 @@ function CadastroEquipes() {
 
   const jogadorTemporario = useRef(jogadores[currentStep - 1]);
   const stepperRef = useRef(null); // Referência para o contêiner do Stepper
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarCpfErrorOpen, setSnackbarCpfErrorOpen] = useState(false); // Snackbar para erro de CPF
+
+  const [snackbarJogadorInfoErrorOpen, setSnackbarJogadorInfoErrorOpen] = useState(false); // Snackbar para erro de informações do jogador
+  const [snackbarJogadorInfoErrorOpenMessage, setSnackbarJogadorInfoErrorOpenMessage] = useState(""); // Mensagem de erro do jogador
 
 
 
@@ -71,30 +76,115 @@ function CadastroEquipes() {
     return -1; // Valor padrão, caso não corresponda a nenhum passo
 
   }
+  const isMatriculaUnica = () => {
+    // Verifica se existem jogadores com matriculas repetidas
+    //Crie um array com as matrículas dos jogadores que são diferentes de ""
+    const matriculas = jogadores.map((jogador) => jogador.matricula).filter((matricula) => matricula !== "");
+    //Verifique se existe alguma matricula que se repete nesse array de matriculas
+    const matriculaSet = new Set();
+
+    for (const matricula of matriculas) {
+      if (matriculaSet.has(matricula)) {
+        return false; // Matrícula repetida encontrada
+      }
+      matriculaSet.add(matricula);
+    }
+
+    //se existir, retorne false, se não existir, retorne true
+    return true; //todas as matriculas são únicas
+    
+  }
+
+  const validarJogador = (jogador, step) => {
+    // Validação básica para jogadores não desabilitados
+    if (!jogador.disabledPlayer) {
+      // Se não for jogador externo, a matrícula deve ter exatamente 11 dígitos
+      if (!jogador.isExternalPlayer && !/^\d{6,11}$/.test(jogador.matricula)) {
+        setSnackbarJogadorInfoErrorOpenMessage("Por favor, insira uma mátricula válida!"); // Abre snackbar de erro
+        setSnackbarJogadorInfoErrorOpen(true); // Abre snackbar de erro
+        return false;
+      }
+
+      
+  
+      // Campos obrigatórios
+      const camposObrigatorios = ['nomeJogador', 'nickname', 'discordUser'];
+      for (const campo of camposObrigatorios) {
+        if (!jogador[campo] || jogador[campo].trim() === ""){
+          setSnackbarJogadorInfoErrorOpenMessage(`Por favor, preencha todos os campos!`); // Abre snackbar de erro
+          setSnackbarJogadorInfoErrorOpen(true); // Abre snackbar de erro
+          return false;
+
+        } 
+      }
+  
+      // Validação do e-mail no jogador capitão
+      if (step === 1 && (!equipe.emailContato || !equipe.emailContato.includes('@'))) {
+        return false;
+      }
+      if(step >=1 && step <= 5){
+        if(jogador.posicao === "") {
+          setSnackbarJogadorInfoErrorOpenMessage("Por favor, selecione uma posição!"); 
+          setSnackbarJogadorInfoErrorOpen(true); // Abre snackbar de erro
+          return false; // Verifica se a posição foi selecionada
+      }
+    }
+  }
+  
+    return true;
+  };
+
+  const validarEquipe = () => {
+    // Validação básica para a equipe
+    if (!equipe.nomeEquipe || equipe.nomeEquipe.trim() === "") {
+      setSnackbarJogadorInfoErrorOpenMessage("Por favor, insira um nome para a equipe."); // Abre snackbar de erro
+      setSnackbarJogadorInfoErrorOpen(true); // Abre snackbar de erro
+      return false;
+    }else if(equipe.nomeEquipe.trim().length < 3 || equipe.nomeEquipe.length > 30){
+      setSnackbarJogadorInfoErrorOpenMessage("O nome da equipe deve ter entre 3 e 30 caracteres."); // Abre snackbar de erro
+      setSnackbarJogadorInfoErrorOpen(true); // Abre snackbar de erro
+      return false;
+
+    }
+  
+    // Validação do e-mail
+    
+  
+    return true;
+
+  }
+  
 
 
   
   
 
  
-  const handleNextConfirmation = () => {
-    setCurrentStep((prev) => {
-      const nextStep = prev + 1;
-      scrollToStep(nextStep); // Rola para o próximo passo
-      return nextStep;
-    });
-  }
+
 
   const handleNext = (event) => {
     if(event) event.preventDefault(); // Impede o recarregamento da página
-    if(currentStep >= 1 && currentStep <= 5){ //Verifica apenas os jogadores titulares
-      if(jogadorTemporario.current.posicao === ""){ //verifica se a posição foi selecionada 
-        return; // Se não foi selecionada, não avança para o próximo passo
+
+    if(currentStep === 0){
+      if(!validarEquipe()){
+        return; // Se a validação falhar, não avança para o próximo passo
       }
     }
-    currentStep !== 0 && currentStep <= 6 && handleJogadoresDataChange(jogadorTemporario.current, currentStep - 1);  //Atualiza os dados dos jogadores globalmente
+    
+    if (currentStep !== 0 && currentStep <= 6) {
+      if (!validarJogador(jogadorTemporario.current, currentStep)) {
+        
+        return; // Se a validação falhar, não avança para o próximo passo
+      } 
+      handleJogadoresDataChange(jogadorTemporario.current, currentStep - 1);
+      }  //Atualiza os dados dos jogadores globalmente
 
     if(currentStep === 7){
+      if(!isMatriculaUnica()){
+        setSnackbarJogadorInfoErrorOpenMessage("As matrículas dos jogadores devem ser únicas!"); // Abre snackbar de erro
+        setSnackbarJogadorInfoErrorOpen(true); // Abre snackbar de erro
+        return false; // Se a validação falhar, não avança para o próximo passo
+      }
       handleConfirmaEscudo(); // Chama a função para confirmar o escudo antes de prosseguir para o formulário de pagamento
     }
 
@@ -138,13 +228,12 @@ function CadastroEquipes() {
     }
   };
 
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarCpfErrorOpen, setSnackbarCpfErrorOpen] = useState(false); // Snackbar para erro de CPF
+  
 
   return (
     <Box component="form" onSubmit={handleNext} autoComplete="off" sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
       <Typography gutterBottom align="center" sx={{ fontSize: "2rem", fontWeight: "bold", mb: 2, color:"white", fontFamily: "Russo One", py:3}}>
-          Cadastro de Equipe
+          Inscrever Equipe
       </Typography>
       <Container maxWidth="md" sx={{paddingBottom: 3 }}>
       <Paper elevation={3} sx={{ p: 3, height: {xs: "auto", md: "auto" }}} >
@@ -253,18 +342,29 @@ function CadastroEquipes() {
         onClose={() => setSnackbarOpen(false)}
         message="Código para pagamento copiado!"
       />
-      
-        <Snackbar
-          open={snackbarCpfErrorOpen}
-          autoHideDuration={3000}
-          onClose={() => setSnackbarCpfErrorOpen(false)}
-          message="CPF inválido!"
-          type="error"
+
+      <Snackbar
+        open={snackbarJogadorInfoErrorOpen}
+        onClose={() => setSnackbarJogadorInfoErrorOpen(false)}
+        type="error"
         >
-          <Alert onClose={() => setSnackbarCpfErrorOpen(false)} severity="error" sx={{ width: '100%' }}>
-            CPF inválido!
-          </Alert>
-        </Snackbar>
+        <Alert onClose={() => setSnackbarJogadorInfoErrorOpen(false)} severity="error" sx={{ width: '100%' }}>
+          {snackbarJogadorInfoErrorOpenMessage}
+        </Alert>
+
+      </Snackbar>
+      
+      <Snackbar
+        open={snackbarCpfErrorOpen}
+        autoHideDuration={3000}
+        onClose={() => setSnackbarCpfErrorOpen(false)}
+        message="CPF inválido!"
+        type="error"
+      >
+        <Alert onClose={() => setSnackbarCpfErrorOpen(false)} severity="error" sx={{ width: '100%' }}>
+          CPF inválido!
+        </Alert>
+      </Snackbar>
      
     </Container>
     </Box>

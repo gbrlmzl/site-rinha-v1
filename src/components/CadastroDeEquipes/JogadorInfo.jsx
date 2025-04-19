@@ -36,8 +36,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
     };
 
     const handlePosicaoChange = (value) => {  
-        setLocalData((prev) => ({ ...prev, posicao: value }));
-        console.log(localData.posicao)
+        setLocalData((prev) => ({ ...prev, posicao: value })); // Atualiza o estado local com a nova posição selecionada
         onPosicaoChange(value, posicaoIcon); // Atualiza o estado global com a posição selecionada
     }
     
@@ -69,7 +68,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
             matricula: newIsExternalPlayer ? "" : "",
             
           }));
-          console.log(localData.matricula)
+          
         };
      // Exponha a função de salvar (opcional, se quiser dar um feedback interno)
     
@@ -128,6 +127,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
                             variant="outlined"
                             margin="dense"
                             required={!localData.isExternalPlayer && !localData.disabledPlayer} // Torna o campo obrigatório se o jogador não for desabilitado e não for externo
+                            regex={/^\d{11}$/} // Regex para validar matrícula  (11 dígitos)
                             />
                         </Box>
                         <FormControl component="fieldset" sx={{marginLeft: {xs: 0, md: 2}, }}>
