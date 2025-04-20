@@ -29,7 +29,7 @@ function Inicio() {
       <Box sx={{display: 'flex', justifyContent:"center", alignItems: 'center', width:"100%", px: {xs: 1, md: 5, lg: 10},}}>
         
           <Typography  sx={{fontFamily:"Russo One", fontSize:"1.5rem", color:"white", textAlign:"center" }}>
-            Bem-vindos ao site da maior fonte de entretenimento do Campus IV 
+            Bem-vindo ao site da maior fonte de entretenimento do Campus IV 
             
           </Typography>
           
