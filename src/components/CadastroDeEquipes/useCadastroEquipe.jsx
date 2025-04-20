@@ -67,7 +67,7 @@ export const useCadastroEquipe = () => {
       const response = await fetch('https://api.imgur.com/3/image', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${imgurToken}`,
+          Authorization: 'Bearer ${IMGUR_TOKEN}',
         },
         body: formData,
       });
@@ -243,7 +243,7 @@ export const useCadastroEquipe = () => {
     });
   };
 
-  const handleImagePreviewChange = (file) => {
+  const handleImagePreviewChange =  (file) => {
     setImagePreview(URL.createObjectURL(file));  // Atualiza o estado com a URL do arquivo
     setImagePreviewFile(file); // Atualiza o estado com o arquivo de imagem
   };
