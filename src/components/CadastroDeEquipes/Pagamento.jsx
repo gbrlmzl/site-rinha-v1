@@ -11,7 +11,7 @@ import pixLogo from "../../assets/imgs/pixLogo.svg"
 import siteSeguroBanner from "../../assets/imgs/siteSeguroBanner.svg"
 
 
-const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCodeBase64, pagamentoAprovado}) => {
+const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCodeBase64, pagamentoAprovado, onCopiaPix}) => {
 
 
 
@@ -44,7 +44,7 @@ const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCod
                 <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valor}</Typography>
                 <Typography variant="body2" sx={{fontFamily:"Roboto", textAlign:"center"}}>Após o pagamento, você receberá um email confirmando sua inscrição.</Typography>
                 <Button variant="contained" color="primary" sx={{borderRadius: 4, mt:2}}
-                onClick={() => {navigator.clipboard.writeText(qrCode), setSnackbarOpen(true)}}>
+                onClick={() => {navigator.clipboard.writeText(qrCode), onCopiaPix()}}>
                       Copiar PIX
                 </Button>
             </Box>

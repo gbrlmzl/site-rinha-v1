@@ -13,8 +13,8 @@ import Link from "next/link";
 
 function InfoBox(){
     return(
-        <Card sx={{maxWidth:{md:"35vw"},  mx:{xs: 3, md: 0}, p:{xs: 1, md: 2}, /*background:"linear-gradient(to bottom,#215F5F,rgb(255, 252, 253))"*/ 
-         backgroundColor: "#394E79" }}>
+        <Card sx={{maxWidth:{md:"35vw"},  mx:{xs: 3, md: 0}, p:{xs: 1, md: 2}, boxShadow:0, /*background:"linear-gradient(to bottom,#215F5F,rgb(255, 252, 253))"*/ 
+         backgroundColor: "#0E1241" }}>
           <Typography variant="title" gutterBottom sx={{ fontSize:{xs:"1.25rem", md: "1.5rem"}, textAlign:"center", py:1 }} component="div" color="#F0F7EE">
             A SEGUNDA EDIÇÃO VEM AÍ...
           </Typography>

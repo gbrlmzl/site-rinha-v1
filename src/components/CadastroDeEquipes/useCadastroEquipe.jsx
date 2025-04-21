@@ -42,12 +42,12 @@ export const useCadastroEquipe = () => {
     setLoading(true); // Inicia o carregamento
     try{
       const urlEscudoImgur = await uploadImagemParaImgur(imagePreviewFile); // Faz o upload da imagem para o Imgur
-      console.log("URL do escudo:", urlEscudoImgur); // Log da URL do escudo
+      
       atualizarEscudoEquipe(urlEscudoImgur); // Atualiza o estado da equipe com a URL do escudo
       
 
     }catch (err) {
-      console.error("Erro:", err);
+      
     } finally {
       setLoading(false);
     }
@@ -59,7 +59,7 @@ export const useCadastroEquipe = () => {
 
 
   const uploadImagemParaImgur = async (file) => {
-    console.log("Fazendo upload da imagem para o Imgur..."); // Log do início do upload
+    
     const formData = new FormData();
     formData.append('image',file );
   
@@ -73,17 +73,15 @@ export const useCadastroEquipe = () => {
       });
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('Erro HTTP:', response.status, errorText);
         return;
       }
   
       const data = await response.json();
       if (data.success) {
-        const urlImagem = data.data.link;
-        console.log('Imagem hospedada em:', urlImagem);
+        const urlImagem = data.data.link; // URL da imagem no Imgur
         return urlImagem; // aqui você pode enviar para seu back-end
       } else {
-        console.error('Erro no upload do Imgur:', data);
+        
       }
     } catch (error) {
       console.error('Erro geral no upload:', error);

@@ -59,6 +59,12 @@ function CadastroEquipes() {
 
 
 
+  const handleCopiaPix = () => {
+    setSnackbarOpen(true); // Abre snackbar de cópia de PIX
+    setTimeout(() => setSnackbarOpen(false), 3000); // Fecha o snackbar após 3 segundos
+  }
+
+
   const validarForm = () => {
     const { cpf } = formPagamento;
     const cpfRegex = /^\d{11}$/; // Apenas números, exatamente 11 dígitos 
@@ -299,6 +305,7 @@ function CadastroEquipes() {
               qrCodeBase64={qrCodeBase64}
               loading={loading}
               pagamentoAprovado={pagamentoAprovado}
+              onCopiaPix={handleCopiaPix}
               />
 
             )}
@@ -323,7 +330,7 @@ function CadastroEquipes() {
             <Button variant="contained" color="success" onClick={handleNext} disabled={!aceitaTermos} > {/* Depois criar uma função separada handlePagamentoClick */}
               Pagamento
             </Button>
-          ) : currentStep === formTitles.length - 1 && !qrCodeGerado ? (
+          ) : currentStep === formTitles.length - 1 && !qrCodeGerado  && !pagamentoAprovado? (
             <Button type= "submit" variant="contained" color="success" disabled={loading}>
               Gerar QR Code PIX
             </Button> 
