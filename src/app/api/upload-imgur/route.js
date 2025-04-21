@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
+    console.log("Token do Imgur:", process.env.IMGUR_ACCESS_TOKEN);
     const formData = await req.formData();
     const image = formData.get("image");
     const title = formData.get("title");
@@ -32,8 +33,9 @@ export async function POST(req) {
     }
 
     return NextResponse.json({ link: data.data.link });
+
   } catch (err) {
-    
-    return NextResponse.json({ error: "Erro interno" }, { status: 500 });
+    console.error("Erro no upload para o Imgur:", err);
+    return NextResponse.json({ error: "Erro interno", detalhes: err.message }, { status: 500 });
   }
 }
