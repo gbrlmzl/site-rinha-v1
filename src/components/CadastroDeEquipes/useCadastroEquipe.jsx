@@ -36,7 +36,7 @@ export const useCadastroEquipe = () => {
   
 
   const handleConfirmaEscudo = async () => {
-    console.log("Upload chamado"); //console para depuração
+    
     if (!imagePreviewFile) {
       return; 
     }
@@ -80,7 +80,7 @@ export const useCadastroEquipe = () => {
       console.error("Erro no upload:", data.error || "Erro desconhecido");
     }
   } catch (error) {
-    console.error("Erro geral no upload:", error);
+    console.error("Erro no upload do escudo:", error);
   }
   };
   
@@ -166,7 +166,7 @@ export const useCadastroEquipe = () => {
         //usePagamentoListener(dataPagamento.uuid, onPagamentoAprovado); ==>> ERROU AQUI <<==
 
       } else {
-        console.error("Erro ao gerar QR Code:", dataPagamento);
+        console.error("Erro ao gerar QR Code:");
       }
     } catch (err) {
       console.error("Erro:", err);
@@ -187,20 +187,20 @@ export const useCadastroEquipe = () => {
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
       onConnect: () => {
-        console.log("Conectado ao WebSocket");
+        
   
         client.subscribe(`/topic/pagamentos/${uuidPagamento}`, (message) => {
           const body = JSON.parse(message.body);
-          console.log("Mensagem recebida:", body);
+          
   
           if (body.status === "PAGAMENTO REALIZADO") {
-            console.log("Pagamento aprovado:", body);
+            
             onPagamentoAprovado();
           }
         });
       },
-      onDisconnect: () => console.log("Desconectado do WebSocket"),
-      debug: (str) => console.log(str),
+      onDisconnect: () => {},
+      debug: () => {},
     });
   
     client.activate();
