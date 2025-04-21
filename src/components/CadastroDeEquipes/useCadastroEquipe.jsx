@@ -36,6 +36,7 @@ export const useCadastroEquipe = () => {
   
 
   const handleConfirmaEscudo = async () => {
+    console.log("Upload chamado"); //console para depuração
     if (!imagePreviewFile) {
       return; 
     }
@@ -59,33 +60,28 @@ export const useCadastroEquipe = () => {
 
 
   const uploadImagemParaImgur = async (file) => {
-    
+
+    const nomeEquipe = equipe.nomeEquipe; // Nome da equipe
     const formData = new FormData();
     formData.append('image',file );
+    formData.append('title',nomeEquipe) //Adiciona o nome da equipe como titulo da imagem mo imgur
   
     try {
-      const response = await fetch('https://api.imgur.com/3/image', {
-        method: 'POST',
-        headers: {
-          Authorization: 'Bearer ${IMGUR_TOKEN}',
-        },
-        body: formData,
-      });
-      if (!response.ok) {
-        const errorText = await response.text();
-        return;
-      }
-  
-      const data = await response.json();
-      if (data.success) {
-        const urlImagem = data.data.link; // URL da imagem no Imgur
-        return urlImagem; // aqui você pode enviar para seu back-end
-      } else {
-        
-      }
-    } catch (error) {
-      console.error('Erro geral no upload:', error);
+       const response = await fetch("/api/upload-imgur", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.link) {
+      return data.link;
+    } else {
+      console.error("Erro no upload:", data.error || "Erro desconhecido");
     }
+  } catch (error) {
+    console.error("Erro geral no upload:", error);
+  }
   };
   
   
