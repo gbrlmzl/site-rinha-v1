@@ -145,7 +145,7 @@ export const useCadastroEquipe = () => {
     
 
     try {
-      const response = await fetch("https://api.rinhacampusiv.com/inscricoes", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/inscricoes`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -186,7 +186,7 @@ export const useCadastroEquipe = () => {
   
     const stompClientRef = { current: null }; // simples objeto ref local
   
-    const socket = new SockJS("https://api.rinhacampusiv.com/ws");
+    const socket = new SockJS(`${process.env.NEXT_PUBLIC_API_URL}/ws`);
     const client = new Client({
       webSocketFactory: () => socket,
       reconnectDelay: 5000,
