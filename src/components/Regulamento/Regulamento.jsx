@@ -4,6 +4,7 @@ import {Paper} from "@mui/material";
 import Image from "next/image";
 import rinhaLogo from "../../assets/imgs/rinhaTitleLogo.svg";
 import Link from "next/link";
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 
 
@@ -30,6 +31,11 @@ const Regulamento = () => {
                 <Typography sx={{fontFamily:"Russo One", fontSize:"1.6rem", color:"white", textAlign:"center" }}>
                     Regulamento
                 </Typography>
+                <Typography variant="text2White" textAlign={"center"} sx={{mb: 1}}>
+                    Contato: rinhacampusiv@gmail.com e @rinhacampusiv <InstagramIcon sx={{ verticalAlign: "middle", fontSize: "1.2rem" }} /> 
+                </Typography>
+                
+
             </Box>
             <Paper elevation={3} sx={{ display:"flex",flexDirection:"column",background:"#394E79", justifyContent:"center", alignItems:"center", p: {xs:2, md:3}, height: {xs: "auto", md: "auto" }, width: {xs: "100%", md: "60vw"},}}>
                 

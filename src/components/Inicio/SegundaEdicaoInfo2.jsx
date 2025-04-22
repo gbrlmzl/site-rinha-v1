@@ -74,7 +74,7 @@ function InfoBox() {
             É isso mesmo, meus amigos.
         </Typography>
         <Typography variant="text2White" fontSize={"1.1125rem"} textAlign={"left"}>
-        Formem suas equipes e se preparem, porque no dia 12 de maio começa a segunda edição da Rinha do Campus IV!
+        Formem suas equipes e se preparem, porque no dia <Typography component="span" fontSize={"1.1125rem"} fontWeight="bold" color="cyan"> 12 de maio </Typography> começa a segunda edição da Rinha do Campus IV!
         </Typography>
         <Typography variant="subtitleWhite" >
         Dessa vez, com um novo formato:
@@ -97,12 +97,17 @@ function InfoBox() {
         
       </Box>
 
-      <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", width: "30vw"}}>
+      <Box sx={{display: "flex",flexDirection:"column", alignItems: "center", justifyContent: "center", width: "30vw",}}>
         <Link href="/inscricoes" passHref>
           <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5, px: 4, py: 1,fontSize: "1.25rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
             INSCREVA SUA EQUIPE
           </Button>
         </Link>
+        <Box sx={{mt:1}}>
+          <Typography fontSize={"0.8rem"} fontFamily={"Roboto"}>
+            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.8rem"} fontWeight="bold" color="cyan"> 5 de maio </Typography>
+          </Typography>
+        </Box>
 
       </Box>
       
@@ -140,7 +145,7 @@ function InfoBox() {
             É isso mesmo, meus amigos.
         </Typography>
         <Typography variant="text2White" fontSize={"0.9rem"}>
-        Formem suas equipes e se preparem, porque no dia 12 de maio começa a segunda edição da Rinha do Campus IV!
+        Formem suas equipes e se preparem, porque no dia <Typography component="span" fontSize={"0.9rem"} fontWeight="bold" color="cyan"> 12 de maio </Typography> começa a segunda edição da Rinha do Campus IV!
         </Typography>
         <Typography variant="subtitleWhite" fontSize={"1.1125rem"} >
         Dessa vez, com um novo formato:
@@ -160,11 +165,16 @@ function InfoBox() {
             </Typography>
         </Box>
 
-        <Link href="/inscricoes" passHref>
+      <Link href="/inscricoes" passHref>
         <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5,mt: 2, px: 4, py: 1,fontSize: "1rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
           INSCREVA SUA EQUIPE
         </Button>
       </Link>
+      <Box>
+          <Typography fontSize={"0.75rem"} fontFamily={"Roboto"}>
+            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.75rem"} fontWeight="bold" color="cyan"> 5 de maio </Typography>
+          </Typography>
+        </Box>
         
       </Box>
       
