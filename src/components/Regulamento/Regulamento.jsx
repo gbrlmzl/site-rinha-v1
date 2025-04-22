@@ -5,7 +5,7 @@ import Image from "next/image";
 import rinhaLogo from "../../assets/imgs/rinhaTitleLogo.svg";
 import Link from "next/link";
 
-import calendarioFaseFinal from "../../assets/imgs/calendarioFaseFinal.svg";
+
 
 const Regulamento = () => {
   return (
@@ -58,6 +58,16 @@ const Regulamento = () => {
                   4. Deixe sua conta League of Legends configurada no servidor regional adequado
                   (brasileiro), com campeões e runas preparados para o torneio.
                   </Typography>
+                  <Typography variant="text2White">
+                  5. No mínimo 3 jogadores titulares devem ser alunos com matrícula ativa no Campus IV da UFPB. Os demais jogadores
+                  podem ser de fora do campus.
+                  </Typography>
+                  <Typography variant="text2White" >
+                  6.  Na fase de grupos, teremos duas partidas ocorrendo simultaneamente em cada horário. Uma será transmitida ao vivo com narração no canal <Link href={" https://www.twitch.tv/rinhacampusiv"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >twitch.tv/rinhacampusiv</Link>, e 
+                  a outra será transmitida sem narração em <Link href={"www.youtube.com/@rinhacampusiv/"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >youtube.com/@rinhacampusiv</Link>. 
+                  Ao se inscrever no torneio, você concorda em permitir que sua gameplay seja transmitida para o público.   
+
+                  </Typography>
                 </Box>
 
                 <Typography variant="title2" color="white" mb={2} mt={3}>
@@ -69,8 +79,7 @@ const Regulamento = () => {
                   Cada jogador só poderá estar inscrito em uma única equipe.
                   </Typography>
                   <Typography variant="text2White" >
-                  2. A equipe pode realizar substituições apenas antes do início de cada jogo, devendo
-                  informar à organização sobre qualquer troca.
+                  2. Em caso de substituição, a equipe deverá informar aos organizadores com, no mínimo, uma hora de antecedência do horário da partida.
                   </Typography>
                   <Typography variant="text2White" >
                   3. Cada integrante da equipe deve fornecer os seguintes dados: nome, nickname e
@@ -82,8 +91,7 @@ const Regulamento = () => {
                   considerado W.O. (Walkover) para a equipe ausente.
                   </Typography>
                   <Typography variant="text2White" >
-                  5. No mínimo 3 jogadores titulares devem ser alunos com matrícula ativa no Campus IV da UFPB. Os demais jogadores
-                  podem ser de fora do campus.
+                  
                   </Typography>
                   
                 </Box>
@@ -94,7 +102,7 @@ const Regulamento = () => {
                 </Typography>
                 <Box  sx={{display: 'flex', flexDirection:"column", justifyContent:"center", alignItems: 'flex-start', px: {xs: 1, md: 5, lg: 10},}} >
                   <Typography variant="text2White" >
-                  1. Cada equipe deve eleger um capitão para representar a equipe perante os oficiais do torneio.
+                  1. Cada equipe deve ter um capitão para representar a equipe perante os oficiais do torneio.
                   </Typography>
                   <Typography variant="text2White" >
                   2. O capitão tem as seguintes responsabilidades: 
@@ -117,10 +125,10 @@ const Regulamento = () => {
                 </Typography>
                 <Box sx={{display: 'flex', flexDirection:"column", justifyContent:"center", alignItems: 'flex-start', px: {xs: 1, md: 5, lg: 10},}} >
                   <Typography variant="text2White">
-                  Todas as partidas serão realizadas no mapa Summoner's Rift (5x5). 
+                  1. Todas as partidas serão realizadas no mapa Summoner's Rift (5x5). 
                   </Typography>
                   <Typography variant="text2White">
-                  As regras padrão de vitória e banimento de campeões se aplicam, sendo conduzidas de acordo com o cliente do jogo (Modo Competitivo).
+                  2. As regras padrão de vitória e banimento de campeões se aplicam, sendo conduzidas de acordo com o cliente do jogo (Modo Torneio).
                   O formato de jogo não poderá ser alterado.
                   </Typography>
                 </Box>
@@ -130,10 +138,10 @@ const Regulamento = () => {
                 </Typography>
                 <Box sx={{display: 'flex', flexDirection:"column", justifyContent:"center", alignItems: 'flex-start', px: {xs: 1, md: 5, lg: 10},}}>
                   <Typography variant="text2White">
-                    O torneio contará com um total de 8 equipes.
+                    1. O torneio contará com um total de 8 equipes.
                   </Typography>
                   <Typography variant="text2White">
-                    O torneio será divido em duas fases: Fase de Grupos e Fase Eliminatória com chave superior e inferior.
+                    2. O torneio será divido em duas fases: Fase de Grupos e Fase Eliminatória com chave superior e inferior.
                   </Typography>
                   <Typography variant="text2White" sx={{fontWeight: "bold"}}>
                     Fase de Grupos:
@@ -157,10 +165,7 @@ const Regulamento = () => {
                   
                   
 
-                  <Typography variant="text2White">
-
-
-                  </Typography>
+                  
                 </Box>
 
                 <Typography variant="title2" color="white" mb={2} mt={3}>
@@ -198,11 +203,15 @@ const Regulamento = () => {
                 </Typography>
                 <Box sx={{display: 'flex', flexDirection:"column", justifyContent:"center", alignItems: 'flex-start', px: {xs: 1, md: 5, lg: 10},}}>
                   <Typography variant="text2White">
-                  1. Se uma equipe desistir de uma partida, ela será considerada derrotada.
+                  1. Se uma equipe não comparecer a partida, será considerada W.O. (Walkover) e perderá a partida.
                   </Typography>
                   <Typography variant="text2White">
-                  2. Se uma equipe desistir do torneio, ela não poderá participar de futuras edições do evento.
+                  2. Caso uma equipe deseje abandonar o torneio, deve informar aos organizadores.
                   </Typography>
+                  <Typography variant="text2White">
+                  3. Após a confirmação da inscrição, a equipe terá o prazo de 48 horas para desistir e receber o reembolso da taxa de inscrição. Após esse prazo, a taxa não será reembolsada.
+                  </Typography>
+
                 </Box>
 
                 <Typography variant="title2" color="white" mb={2} mt={3}>
@@ -257,10 +266,10 @@ const Regulamento = () => {
 
                 <Box sx={{display: 'flex', flexDirection:"column", justifyContent:"center", alignItems: 'flex-start', px: {xs: 1, md: 5, lg: 10},}}>
                   <Typography variant="text2White">
-                  1. A equipe campeã receberá um valor em dinheiro (estipulado conforme o número de participantes do torneio), troféu e medalhas.
+                  1. A equipe campeã receberá um valor em dinheiro (que será divulgado no dia 5 de maio), troféu e medalhas de campeão.
                   </Typography>
                   <Typography variant="text2White">
-                  2. A equipe vice-campeã receberá a devolução da taxa de inscrição e medalhas.
+                  2. A equipe vice-campeã receberá medalhas de vice-campeão e a devolução da taxa de inscrição.
                   </Typography>
                 </Box>
 

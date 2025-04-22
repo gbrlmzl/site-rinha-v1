@@ -1,7 +1,6 @@
-import Image from "next/image";
-import programacaoImg from "../../assets/imgs/programacaoTorneio.svg";
+import Image from "next/image";;
 import {Box} from "@mui/system";
-import programacaoTransparent from "../../assets/imgs/programacaoTorneioTransparent.svg";
+import programacaoTorneio from "../../assets/imgs/programacaoTorneioTransmissao.svg";
 
 
 
@@ -19,7 +18,7 @@ function ProgramacaoComponent(){
             }}
           >
             <Image
-              src={programacaoTransparent}
+              src={programacaoTorneio}
               alt="Calendário da Fase Final"
               style={{ width: "100%", height: "auto" }}
               priority
@@ -37,7 +36,7 @@ function ProgramacaoComponent(){
             }}
           >
             <Image
-              src={programacaoTransparent}
+              src={programacaoTorneio}
               alt="Programação (Mobile)"
               style={{ width: "100%", height: "auto" }}
               priority

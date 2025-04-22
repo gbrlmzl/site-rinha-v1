@@ -91,7 +91,7 @@ const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCod
               Pagamento
             </Typography>
             <Typography variant="h6" fontFamily={"Roboto"} mb={2}>
-              Taxa de inscrição: R$ {valor} <br />
+              Taxa de inscrição: 10 R$ por jogador <br />
             </Typography>
             
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>

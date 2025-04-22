@@ -1,9 +1,8 @@
 import Image from 'next/image';
-import rinhaLogoEdicao from '../../assets/imgs/rinhaLogoEdicao.svg';
-import SegundaEdicaoInfo from './SegundaEdicaoInfo';
+
 import SegundaEdicaoInfo2 from './SegundaEdicaoInfo2';
 
-import programacaoTorneio from "../../assets/imgs/programacaoTorneio.svg"; 
+
 
 import { Box } from '@mui/system';
 import { Card, Typography} from '@mui/material';

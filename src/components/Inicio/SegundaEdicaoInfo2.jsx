@@ -8,7 +8,7 @@ function InfoBox() {
   return (
     <Box sx={{ position: "relative", width: "100vw", height: {xs: "120vh", md:"100vh"}, overflowX: "hidden" }}>
     
-    <Box sx={{display:{xs: "none", md:"block"}}}> {/* Imagem de fundo para telas grandes */}
+    <Box sx={{display:{xs: "none", lg:"block"}}}> {/* Imagem de fundo para telas grandes */}
       <Image
         src={gravesBackground}
         alt="Graves"
@@ -22,7 +22,7 @@ function InfoBox() {
       />
 
     </Box>
-    <Box sx={{display:{xs: "block", md:"none", "& img": {
+    <Box sx={{display:{xs: "block", lg:"none", "& img": {
       objectFit: "cover",
       objectPosition: "bottom right",
       "@media (max-height: 750px)": {
@@ -53,7 +53,7 @@ function InfoBox() {
         width: "60vw",
         height: "100%",
         px: {md: 6, lg: 8 },
-        pt: {md: 8, lg: 15 },
+        pt: {s: 5,md: 5, lg: 5, xl: 8 },
         display: { xs: "none", md: "flex" },
         flexDirection: "column",
         alignItems: "flex-start",
@@ -89,8 +89,9 @@ function InfoBox() {
             <Typography>
                 ● JOGOS NO PERÍODO NOTURNO (19H ÀS 22H)
             </Typography>
+            
             <Typography>
-                ● ATÉ 3 JOGADORES DE FORA DO CAMPUS POR EQUIPE
+                ● CADA EQUIPE PODE TER ATÉ 3 JOGADORES (INCLUINDO O RESERVA) DE FORA DO CAMPUS. 
             </Typography>
         </Box>
         
