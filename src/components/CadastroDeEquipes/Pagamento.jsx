@@ -1,5 +1,7 @@
 "use client";
 import { Box, TextField, Button, Typography, CircularProgress, Card } from "@mui/material";
+import { useEffect, useState } from "react";
+
 
 
 import "@fontsource/russo-one"
@@ -12,6 +14,33 @@ import siteSeguroBanner from "../../assets/imgs/siteSeguroBanner.svg"
 
 
 const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCodeBase64, pagamentoAprovado, onCopiaPix}) => {
+
+  const [tempoRestante, setTempoRestante] = useState(599); // 9:59 minutos em segundos
+
+  useEffect(() => {
+    if (!qrCodeGerado || pagamentoAprovado) return;
+  
+    const timer = setInterval(() => {
+      setTempoRestante((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  
+    return () => clearInterval(timer);
+  }, [qrCodeGerado, pagamentoAprovado]);
+
+  const formatarTempo = (segundos) => {
+    const m = String(Math.floor(segundos / 60)).padStart(2, '0');
+    const s = String(segundos % 60).padStart(2, '0');
+    return `${m}:${s}`;
+  };
+  
+  
+
 
 
 
@@ -41,6 +70,12 @@ const Pagamento = ({ valor, data, onChange, loading, qrCodeGerado, qrCode, qrCod
                 <Card sx={{width: 200, height: 200, display: "flex", justifyContent: "center", alignItems: "center", }}>
                   <Image src={qrCodeBase64} width={200} height={200} alt="QR Code"></Image>
                 </Card>
+                <Box>
+                  <Typography variant="body1" fontFamily="Roboto" color="textSecondary">
+                    QR Code expira em: {formatarTempo(tempoRestante)}
+                  </Typography>
+                </Box>
+
                 <Typography variant="h5" sx={{fontFamily: "Russo One", color: "#333"}}>Valor: R$ {valor}</Typography>
                 <Typography variant="body2" sx={{fontFamily:"Roboto", textAlign:"center"}}>Após o pagamento, você receberá um email confirmando sua inscrição.</Typography>
                 <Button variant="contained" color="primary" sx={{borderRadius: 4, mt:2}}

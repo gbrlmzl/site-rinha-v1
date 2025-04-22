@@ -166,7 +166,7 @@ export const useCadastroEquipe = () => {
         //usePagamentoListener(dataPagamento.uuid, onPagamentoAprovado); ==>> ERROU AQUI <<==
 
       } else {
-        console.error("Erro ao gerar QR Code:");
+        console.error("Erro ao gerar QR Code.");
       }
     } catch (err) {
       console.error("Erro:", err);

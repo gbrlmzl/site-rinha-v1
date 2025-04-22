@@ -80,7 +80,7 @@ function ResponsiveAppBar() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{ display: { xs: 'block', md: 'none' } }} // Define propriedades do menu para telas menores
-                slotProps={{list:{sx:{py:0, background:"#11B5E4"}}}}//controla as propriedades do menu
+                slotProps={{list:{sx:{py:0, background:"#0E1241"}}}}//controla as propriedades do menu
                
 
               >
@@ -104,9 +104,9 @@ function ResponsiveAppBar() {
                   </Link>
                 </MenuItem>
 
-                <MenuItem key={"sobre"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
-                  <Link href="/sobre" style={{ textDecoration: 'none'}}>
-                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Sobre</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                <MenuItem key={"programacao"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
+                  <Link href="/programacao" style={{ textDecoration: 'none'}}>
+                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Programação</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                   </Link>
                   
                 </MenuItem>
@@ -143,11 +143,11 @@ function ResponsiveAppBar() {
                   Regulamento
                 </Button>
               </Link>
-              <Link href="sobre" style={{ textDecoration: 'none'}}>
+              <Link href="/programacao" style={{ textDecoration: 'none'}}>
                 <Button
                   sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 
                 >
-                  Sobre
+                  Programação
                 </Button>
               </Link>
             </Box>

@@ -8,7 +8,7 @@ import { Box } from '@mui/system';
 
 export default function Home() {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflowX:"hidden" }}>
       <Header />
       <Box sx={{display: "flex", flexGrow: 1 }}>
         <Inicio />

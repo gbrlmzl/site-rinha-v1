@@ -16,6 +16,15 @@ const theme = createTheme({
       main: '#000000',
       contrastText: '#E3E3E3',
     },
+    inscricaoButton:{
+      main: "#11B5E4",
+      contrastText: "#FFFFFF",
+
+    },
+    cyanButton:{
+      main: "#00BFFF",
+      contrastText: "#FFFFFF",
+    },
     background: {
       default: '#000022',
     },
@@ -140,6 +149,13 @@ const theme = createTheme({
         fontSize: "1.25rem",
         fontFamily: 'Roboto',
         fontWeight: 700,
+
+      },
+      subtitleWhite:{
+        fontSize: '1.3rem',
+        fontFamily: 'Poppins',
+        fontWeight: 500,
+        color:"#ffffff"
 
       },
       text1:{

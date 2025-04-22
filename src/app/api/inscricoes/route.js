@@ -5,7 +5,7 @@ export async function POST(req) {
     const { dadosEquipe, dadosPagamento } = await req.json(); //lê o json do front
 
     //Envia esse mesmo JSON para sua API externa
-    const response = await fetch("https://api.rinhacampusiv.com/inscricoes", {
+    const response = await fetch("https://api.rinhacampusiv.com/inscricoes" , {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ dadosEquipe, dadosPagamento }),
