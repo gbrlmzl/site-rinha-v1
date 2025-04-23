@@ -49,7 +49,7 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
               <CardMedia component="img" image={escudoPreview} alt="Escudo da equipe" sx={{ width: "100%", height: "100%", objectFit: "contain" }} />
             ) : (
               <Typography variant="body1" color="textSecondary" align="center" >
-                Escudo
+                Ideal: PNG 
               </Typography>
             )}
           </Card>
@@ -59,7 +59,7 @@ function EquipeInfo({ formTitle, data, onChange, onImageChange, escudoPreview })
         <Grid  size={{ xs: 12 }} display="flex" justifyContent="center" alignItems={"center"}>
           <Button component="label" variant="contained" /*startIcon={<CloudUpload />}*/color="primary" >
            <Typography sx={{marginRight:1}}>Escudo</Typography><UploadIcon width={40} height={40} ></UploadIcon>
-            <VisuallyHiddenInput type="file" accept="image/*" onChange={handleImageUpload} />
+            <VisuallyHiddenInput type="file" accept=".jpg,.jpeg,.png,.webp" onChange={handleImageUpload} />
           </Button>
         </Grid>
 

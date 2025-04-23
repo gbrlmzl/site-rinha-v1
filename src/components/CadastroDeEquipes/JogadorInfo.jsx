@@ -14,7 +14,7 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
     const stepJogadorCapitao = 1; // Defina o número do passo do jogador capitão aqui 
 
     const isJogadorOpcional = stepAtual === stepJogadorOpcional; // Verifica se o passo atual é o do jogador opcional
-    const isMatriculasObrigatorias = stepAtual >= 1 && stepAtual <= 3; // Verifica se o passo atual é o do jogador capitão
+    const isMatriculasObrigatorias = stepAtual >= 1 && stepAtual <= 3; // Verifica se o passo atual é o dos jogadores com matricula obrigatórias
     const isJogadorCapitao = stepAtual === stepJogadorCapitao; // Verifica se o passo atual é o do jogador capitão
    
    
@@ -77,9 +77,19 @@ function JogadorInfo({formTitle, data, posicaoIcon, onPosicaoChange, onSave, ste
     return (
         <Box sx={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center"}}>
             <Stack flexDirection={"row"}>
-                <Typography variant="h5" component="h2" sx={{ fontWeight: "bold", pb: 2, textAlign: "center", fontFamily:"Russo One"}}>
+                <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+                <Typography variant="h5" component="h2" sx={{ fontWeight: "bold", textAlign: "center", fontFamily:"Russo One"}}>
                     {formTitle}
                 </Typography>
+                {isMatriculasObrigatorias && (
+                    <Typography  variant="text2" fontSize={"0.75 rem"}>
+                        Matrícula obrigatória
+
+                    </Typography>
+                )}
+
+                </Box>                
+                
 
                 {isJogadorOpcional && (
                 <FormControl component="fieldset">
