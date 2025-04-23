@@ -161,7 +161,7 @@ function InfoBox() {
                 ● JOGOS NO PERÍODO NOTURNO (19H ÀS 22H)
             </Typography>
             <Typography fontSize={"0.8rem"}>
-                ● ATÉ 3 JOGADORES DE FORA DO CAMPUS POR EQUIPE
+                ● CADA EQUIPE PODE TER ATÉ 3 JOGADORES (INCLUINDO O RESERVA) DE FORA DO CAMPUS.
             </Typography>
         </Box>
 

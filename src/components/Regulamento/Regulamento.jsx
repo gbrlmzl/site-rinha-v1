@@ -64,12 +64,8 @@ const Regulamento = () => {
                   4. Deixe sua conta League of Legends configurada no servidor regional adequado
                   (brasileiro), com campeões e runas preparados para o torneio.
                   </Typography>
-                  <Typography variant="text2White">
-                  5. No mínimo 3 jogadores titulares devem ser alunos com matrícula ativa no Campus IV da UFPB. Os demais jogadores
-                  podem ser de fora do campus.
-                  </Typography>
                   <Typography variant="text2White" >
-                  6.  Na fase de grupos, teremos duas partidas ocorrendo simultaneamente em cada horário. Uma será transmitida ao vivo com narração no canal <Link href={" https://www.twitch.tv/rinhacampusiv"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >twitch.tv/rinhacampusiv</Link>, e 
+                  5.  Na fase de grupos, teremos duas partidas ocorrendo simultaneamente em cada horário. Uma será transmitida ao vivo com narração no canal <Link href={" https://www.twitch.tv/rinhacampusiv"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >twitch.tv/rinhacampusiv</Link>, e 
                   a outra será transmitida sem narração em <Link href={"www.youtube.com/@rinhacampusiv/"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >youtube.com/@rinhacampusiv</Link>. 
                   Ao se inscrever no torneio, você concorda em permitir que sua gameplay seja transmitida para o público.   
 
@@ -84,18 +80,21 @@ const Regulamento = () => {
                   1. Cada equipe deverá ter cinco jogadores titulares e, opcionalmente, 1 reserva.
                   Cada jogador só poderá estar inscrito em uma única equipe.
                   </Typography>
+                  <Typography variant="text2White" >
+                  2. No mínimo 3 jogadores titulares devem ser alunos com matrícula ativa ou formados no Campus IV da UFPB. Os demais jogadores podem ser de fora do campus.
+                  </Typography>
                   <Typography variant="text2White">
-                  2. Cada jogador da equipe, incluindo o reserva, pagará uma <Typography component="span" fontFamily={"Poppins"} fontSize={"0.85rem"} fontWeight="bold" color="white"> taxa de inscrição </Typography> de R$ 10,00, que será convertida em premiação.
+                  3. Cada jogador da equipe, incluindo o reserva, pagará uma <Typography component="span" fontFamily={"Poppins"} fontSize={"0.85rem"} fontWeight="bold" color="white"> taxa de inscrição </Typography> de R$ 10,00, que será convertida em premiação.
                   </Typography>
                   <Typography variant="text2White" >
-                  3. Em caso de substituição, a equipe deverá informar aos organizadores com, no mínimo, uma hora de antecedência do horário da partida.
+                  4. Em caso de substituição, a equipe deverá informar aos organizadores com, no mínimo, uma hora de antecedência do horário da partida.
                   </Typography>
                   <Typography variant="text2White" >
-                  4. Cada integrante da equipe deve fornecer os seguintes dados: nome, nickname e
+                  5. Cada integrante da equipe deve fornecer os seguintes dados: nome, nickname e
                   matrícula (para os que tiverem)
                   </Typography>
                   <Typography variant="text2White">
-                  5. Todos os jogadores devem estar presentes de forma remota na hora da partida.
+                  6. Todos os jogadores devem estar presentes de forma remota na hora da partida.
                   Caso um jogador não esteja presente ou a equipe esteja incompleta, será
                   considerado W.O. (Walkover) para a equipe ausente.
                   </Typography>
