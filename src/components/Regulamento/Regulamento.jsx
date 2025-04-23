@@ -84,15 +84,18 @@ const Regulamento = () => {
                   1. Cada equipe deverá ter cinco jogadores titulares e, opcionalmente, 1 reserva.
                   Cada jogador só poderá estar inscrito em uma única equipe.
                   </Typography>
-                  <Typography variant="text2White" >
-                  2. Em caso de substituição, a equipe deverá informar aos organizadores com, no mínimo, uma hora de antecedência do horário da partida.
+                  <Typography variant="text2White">
+                  2. Cada jogador da equipe, incluindo o reserva, pagará uma <Typography component="span" fontFamily={"Poppins"} fontSize={"0.85rem"} fontWeight="bold" color="white"> taxa de inscrição </Typography> de R$ 10,00, que será convertida em premiação.
                   </Typography>
                   <Typography variant="text2White" >
-                  3. Cada integrante da equipe deve fornecer os seguintes dados: nome, nickname e
+                  3. Em caso de substituição, a equipe deverá informar aos organizadores com, no mínimo, uma hora de antecedência do horário da partida.
+                  </Typography>
+                  <Typography variant="text2White" >
+                  4. Cada integrante da equipe deve fornecer os seguintes dados: nome, nickname e
                   matrícula (para os que tiverem)
                   </Typography>
                   <Typography variant="text2White">
-                  4. Todos os jogadores devem estar presentes de forma remota na hora da partida.
+                  5. Todos os jogadores devem estar presentes de forma remota na hora da partida.
                   Caso um jogador não esteja presente ou a equipe esteja incompleta, será
                   considerado W.O. (Walkover) para a equipe ausente.
                   </Typography>
