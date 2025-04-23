@@ -13,7 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import rinhaLogo from '../../assets/imgs/rinhaTitleLogo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
-import Inscricoes from '@/app/inscricoes/page';
+//import Inscricoes from '@/app/inscricoes/page';
 
 
 
@@ -92,9 +92,9 @@ function ResponsiveAppBar() {
                   </Link>
                 </MenuItem>
 
-                <MenuItem key={"inscricoes"}  onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
-                  <Link href="/inscricoes" style={{ textDecoration: 'none'}}>
-                    <Typography sx={{ textAlign: 'center'}} fontFamily={"Poppins"} color='#ffffff'>Inscrição</Typography> {/*Define propriedades do texto do menu para telas menores*/}
+                <MenuItem key={"inscricoes"}   onClick={handleCloseNavMenu} sx={{}} > {/*Define propriedades do menu para telas menores*/}
+                  <Link href="/" style={{ textDecoration: 'none'}}>
+                    <Typography sx={{ textAlign: 'center'}} disabled fontFamily={"Poppins"} color="#585858">Inscrição</Typography> {/*Define propriedades do texto do menu para telas menores*/}
                   </Link>
                 </MenuItem>
 
@@ -129,13 +129,15 @@ function ResponsiveAppBar() {
                 </Button>
               </Link>
               
-              <Link href="inscricoes" style={{ textDecoration: 'none'}}>
-                <Button
-                  sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 
+              <Link href="/" style={{ textDecoration: 'none'}}>
+                <Button 
+                  sx={{my: 2, color: "GrayText",  fontFamily: 'Poppins', fontSize: 20, padding: 1, /*"&:hover": {color: "#01F7FF"}*/}} 
                 >
                   Inscrição
                 </Button>
               </Link>
+              
+            
               <Link href="regulamento" style={{ textDecoration: 'none'}}>
                 <Button
                   sx={{my: 2, color: 'white',  fontFamily: 'Poppins', fontSize: 20, padding: 1, "&:hover": {color: "#01F7FF"}}} 

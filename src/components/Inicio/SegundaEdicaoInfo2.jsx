@@ -98,14 +98,14 @@ function InfoBox() {
       </Box>
 
       <Box sx={{display: "flex",flexDirection:"column", alignItems: "center", justifyContent: "center", width: "30vw",}}>
-        <Link href="/inscricoes" passHref>
-          <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5, px: 4, py: 1,fontSize: "1.25rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
-            INSCREVA SUA EQUIPE
+        <Link href="/programacao" passHref>
+          <Button variant="contained"  color="inscricaoButton" size="large" sx={{borderRadius:5, px: 4, py: 1,fontSize: "1.25rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
+            CONFIRA A PROGRAMAÇÃO
           </Button>
         </Link>
         <Box sx={{mt:1}}>
-          <Typography fontSize={"0.8rem"} fontFamily={"Roboto"}>
-            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.8rem"} fontWeight="bold" color="cyan"> 5 de maio </Typography>
+          <Typography fontSize={"1.125rem"} fontFamily={"Roboto"}>
+            As inscrições abrem às <Typography component="span" fontSize={"1.125rem"} fontWeight="bold" color="cyan"> 18h </Typography>
           </Typography>
         </Box>
 
@@ -165,14 +165,14 @@ function InfoBox() {
             </Typography>
         </Box>
 
-      <Link href="/inscricoes" passHref>
+      <Link href="/programacao" passHref>
         <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5,mt: 2, px: 4, py: 1,fontSize: "1rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
-          INSCREVA SUA EQUIPE
+          CONFIRA A PROGRAMAÇÃO
         </Button>
       </Link>
       <Box>
-          <Typography fontSize={"0.75rem"} fontFamily={"Roboto"}>
-            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.75rem"} fontWeight="bold" color="cyan"> 5 de maio </Typography>
+          <Typography fontSize={"0.95rem"} fontFamily={"Roboto"}>
+            As inscrições abrem às <Typography component="span" fontSize={"0.95rem"} fontWeight="bold" color="cyan"> 18h </Typography>
           </Typography>
         </Box>
         
