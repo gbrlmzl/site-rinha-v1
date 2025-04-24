@@ -65,8 +65,8 @@ const Regulamento = () => {
                   (brasileiro), com campeões e runas preparados para o torneio.
                   </Typography>
                   <Typography variant="text2White" >
-                  5.  Na fase de grupos, teremos duas partidas ocorrendo simultaneamente em cada horário. Uma será transmitida ao vivo com narração no canal <Link href={" https://www.twitch.tv/rinhacampusiv"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >twitch.tv/rinhacampusiv</Link>, e 
-                  a outra será transmitida sem narração em <Link href={"www.youtube.com/@rinhacampusiv/"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >youtube.com/@rinhacampusiv</Link>. 
+                  5.  Na fase de grupos, teremos duas partidas ocorrendo simultaneamente em cada horário. Uma será transmitida ao vivo com narração no canal <Link href={"https://www.twitch.tv/rinhacampusiv"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >twitch.tv/rinhacampusiv</Link>, e 
+                  a outra será transmitida sem narração em <Link href={"https://www.youtube.com/@rinhacampusiv/"} target="_blank" rel="noopener noreferrer" style={{textDecoration:"none", color:"#01F7FF", }} >youtube.com/@rinhacampusiv</Link>. 
                   Ao se inscrever no torneio, você concorda em permitir que sua gameplay seja transmitida para o público.   
 
                   </Typography>
