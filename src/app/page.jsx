@@ -4,6 +4,14 @@ import { Box } from '@mui/system';
 
 
 
+export const metadata = {
+  title: 'Rinha do Campus IV',
+  description: 'Bem-vindo ao site oficial da Rinha do Campus IV.',
+  appleWebApp: {
+    title: 'Rinha',
+  },
+};
+
 
 
 export default function Home() {

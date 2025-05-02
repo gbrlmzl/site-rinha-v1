@@ -21,6 +21,11 @@ const theme = createTheme({
       contrastText: "#FFFFFF",
 
     },
+    encontraEquipeButton:{
+      main: "#16BE00",
+      contrastText: "#FFFFFF",
+
+    },
     cyanButton:{
       main: "#00BFFF",
       contrastText: "#FFFFFF",

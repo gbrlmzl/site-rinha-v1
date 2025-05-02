@@ -3,10 +3,11 @@ import Image from "next/image";
 import gravesBackground from "../../assets/imgs/gravesSplashFHD.svg";
 import gravesBackgroundMobile from "../../assets/imgs/gravesSplashMobile.svg";
 import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 
 function InfoBox() {
   return (
-    <Box sx={{ position: "relative", width: "100vw", height: {xs: "120vh", md:"100vh"}, overflowX: "hidden" }}>
+    <Box sx={{ position: "relative", width: "100vw", height: {xs: "140vh", md:"100vh"}, overflowX: "hidden" }}>
     
     <Box sx={{display:{xs: "none", lg:"block"}}}> {/* Imagem de fundo para telas grandes */}
       <Image
@@ -99,21 +100,28 @@ function InfoBox() {
 
       <Box sx={{display: "flex",flexDirection:"column", alignItems: "center", justifyContent: "center", width: "30vw",}}>
         <Link href="/inscricoes" passHref>
-          <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5, px: 4, py: 1,fontSize: "1.25rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
+          <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5, px: 4, py: 1,fontSize: "1.25rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" } }}>
             INSCREVA SUA EQUIPE
           </Button>
         </Link>
-        <Box sx={{mt:1}}>
+        <Box sx={{display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", mt: 0.5}}>
+          <Box sx={{display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", mb: 0.5}}>
+            <Typography variant="text2White" fontSize={"0.8rem"} >
+              Ainda não tem uma equipe? 
+            </Typography>
+          </Box>
+          <Link href="https://chat.whatsapp.com/LRSVVOsbRae3i1uRHC2xpl" passHref target="_blank">
+            <Button variant="contained" color="encontraEquipeButton" size="large" sx={{borderRadius:5, px: 2, py: 1,fontSize: "1.25rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0E7900", color: "white" },}}>
+              ENCONTRE JOGADORES <FaWhatsapp size={"2rem"} style={{marginLeft:"0.5rem"}}/> 
+            </Button>
+          </Link>
+        </Box>
+        <Box sx={{mt:0.5}}>
           <Typography fontSize={"0.8rem"} fontFamily={"Roboto"}>
-            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.8rem"} fontWeight="bold" color="cyan"> 5 de maio </Typography>
+            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.8rem"} fontWeight="bold" color="cyan"> 8 de maio </Typography>
           </Typography>
         </Box>
-
-      </Box>
-      
-      
-      
-      
+      </Box> 
     </Box>
 
     {/* Texto por cima da imagem em telas pequenas*/}
@@ -140,43 +148,61 @@ function InfoBox() {
       <Typography fontFamily={"Russo one"} fontSize={"1.4rem"} sx={{ fontWeight: "bold", mb: 2 }}>
         A SEGUNDA EDIÇÃO VEM AÍ!
       </Typography>
-      <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 1.5, /*maxWidth:"30vw",*/ mb: 4}}>
-        <Typography variant="subtitleWhite" fontSize={"1.1125rem"}>
-            É isso mesmo, meus amigos.
-        </Typography>
-        <Typography variant="text2White" fontSize={"0.9rem"}>
-        Formem suas equipes e se preparem, porque no dia <Typography component="span" fontSize={"0.9rem"} fontWeight="bold" color="cyan"> 12 de maio </Typography> começa a segunda edição da Rinha do Campus IV!
-        </Typography>
-        <Typography variant="subtitleWhite" fontSize={"1.1125rem"} >
-        Dessa vez, com um novo formato:
-        </Typography>
-        <Box sx={{display:"flex", flexDirection:"column", textAlign:"left", }}>
-            <Typography fontSize={"0.8rem"} >
-                ● PLAY-IN COM FASE DE GRUPOS
-            </Typography>
-            <Typography fontSize={"0.8rem"}>
-                ● PLAYOFFS COM CHAVE SUPERIOR E CHAVE INFERIOR
-            </Typography>
-            <Typography fontSize={"0.8rem"}>
-                ● JOGOS NO PERÍODO NOTURNO (19H ÀS 22H)
-            </Typography>
-            <Typography fontSize={"0.8rem"}>
-                ● CADA EQUIPE PODE TER ATÉ 3 JOGADORES (INCLUINDO O RESERVA) DE FORA DO CAMPUS.
-            </Typography>
-        </Box>
-
-      <Link href="/inscricoes" passHref>
-        <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5,mt: 2, px: 4, py: 1,fontSize: "1rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
-          INSCREVA SUA EQUIPE
-        </Button>
-      </Link>
-      <Box>
-          <Typography fontSize={"0.75rem"} fontFamily={"Roboto"}>
-            O período de inscrições vai até o dia <Typography component="span" fontSize={"0.75rem"} fontWeight="bold" color="cyan"> 5 de maio </Typography>
+        <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 1.5, /*maxWidth:"30vw",*/ mb: 4}}>
+          <Typography variant="subtitleWhite" fontSize={"1.1125rem"}>
+              É isso mesmo, meus amigos.
           </Typography>
+          <Typography variant="text2White" fontSize={"0.9rem"}>
+          Formem suas equipes e se preparem, porque no dia <Typography component="span" fontSize={"0.9rem"} fontWeight="bold" color="cyan"> 12 de maio </Typography> começa a segunda edição da Rinha do Campus IV!
+          </Typography>
+          {/*<Typography variant="subtitleWhite" fontSize={"1.1125rem"} >
+          Dessa vez, com um novo formato:
+          </Typography>
+          <Box sx={{display:"flex", flexDirection:"column", textAlign:"left", }}>
+              <Typography fontSize={"0.8rem"} >
+                  ● PLAY-IN COM FASE DE GRUPOS
+              </Typography>
+              <Typography fontSize={"0.8rem"}>
+                  ● PLAYOFFS COM CHAVE SUPERIOR E CHAVE INFERIOR
+              </Typography>
+              <Typography fontSize={"0.8rem"}>
+                  ● JOGOS NO PERÍODO NOTURNO (19H ÀS 22H)
+              </Typography>
+              <Typography fontSize={"0.8rem"}>
+                  ● CADA EQUIPE PODE TER ATÉ 3 JOGADORES (INCLUINDO O RESERVA) DE FORA DO CAMPUS.
+              </Typography>
+          </Box>*/}
+          <Box> 
+
+          </Box>
+          
+          
+          <Box sx={{display:"flex",flexDirection:"column", alignItems: "center", justifyContent: "center"}}>
+            <Link href="/inscricoes" passHref>
+              <Button variant="contained" color="inscricaoButton" size="large" sx={{borderRadius:5,mt: 2, px: 4, py: 1,fontSize: "1rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0051E6", color: "white" },}}>
+                INSCREVA SUA EQUIPE
+              </Button>
+            </Link>
+            <Box sx={{display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", mt: "0.20rem"}}>
+                <Box sx={{display: "flex", flexDirection:"column", alignItems:"center", justifyContent:"center", mb: "0.20 rem"}}>
+                  <Typography variant="text2White" fontSize={"0.75rem"} >
+                    Ainda não tem uma equipe? 
+                  </Typography>
+                </Box>
+                <Link href="https://chat.whatsapp.com/LRSVVOsbRae3i1uRHC2xpl" passHref target="_blank">
+                  <Button variant="contained" color="encontraEquipeButton" size="large" sx={{borderRadius:5, px: 2, py: 1,fontSize: "1rem", fontFamily: "Russo One", fontWeight: "bold", ":hover": { backgroundColor: "#0E7900", color: "white" },}}>
+                    ENCONTRE JOGADORES <FaWhatsapp size={"1.5rem"} style={{marginLeft:"0.5rem"}}/> 
+                  </Button>
+                </Link>
+            </Box>
+            <Box>
+                <Typography fontSize={"0.75rem"} fontFamily={"Roboto"} mt={0.25}>
+                  O período de inscrições vai até o dia <Typography component="span" fontSize={"0.75rem"} fontWeight="bold" color="cyan"> 8 de maio </Typography>
+                </Typography>
+            </Box>
+          </Box>
+          
         </Box>
-        
-      </Box>
       
 
         

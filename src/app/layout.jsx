@@ -9,11 +9,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <meta name="apple-mobile-web-app-title" content="Rinha" />
-        {/*<link rel="icon" href="/favicon.ico" />*/}
-      </head>
       <body>
         <AppRouterCacheProvider options={{ key: 'css' }}>
           <ThemeRegistry>

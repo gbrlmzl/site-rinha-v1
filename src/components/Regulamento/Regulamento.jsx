@@ -81,7 +81,7 @@ const Regulamento = () => {
                   Cada jogador só poderá estar inscrito em uma única equipe.
                   </Typography>
                   <Typography variant="text2White" >
-                  2. No mínimo 3 jogadores titulares devem ser alunos com matrícula ativa ou formados no Campus IV da UFPB. Os demais jogadores podem ser de fora do campus.
+                  2. No mínimo 3 jogadores titulares devem ser ingressantes, alunos com matrícula ativa ou formados no Campus IV da UFPB. Os demais jogadores podem ser de fora do campus.
                   </Typography>
                   <Typography variant="text2White">
                   3. Cada jogador da equipe, incluindo o reserva, pagará uma <Typography component="span" fontFamily={"Poppins"} fontSize={"0.85rem"} fontWeight="bold" color="white"> taxa de inscrição </Typography> de R$ 10,00, que será convertida em premiação.
@@ -274,10 +274,13 @@ const Regulamento = () => {
 
                 <Box sx={{display: 'flex', flexDirection:"column", justifyContent:"center", alignItems: 'flex-start', px: {xs: 1, md: 5, lg: 10},}}>
                   <Typography variant="text2White">
-                  1. A equipe campeã receberá um valor em dinheiro (que será divulgado no dia 5 de maio), troféu e medalhas de campeão.
+                    1. A equipe campeã receberá 400 reais, troféu e medalhas de campeão.
                   </Typography>
                   <Typography variant="text2White">
-                  2. A equipe vice-campeã receberá medalhas de vice-campeão e a devolução da taxa de inscrição.
+                    2. A equipe vice-campeã receberá 150 reais e medalhas de vice-campeão.
+                  </Typography>
+                  <Typography variant="text2White">
+                    3. A terceira colocada receberá a devolução da taxa de inscrição.
                   </Typography>
                 </Box>
 
