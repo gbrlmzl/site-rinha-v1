@@ -1,8 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
-import {Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography,Checkbox } from '@mui/material';
+import {Button, Dialog, DialogTitle, DialogContent, DialogActions, Typography } from '@mui/material';
 import {Box} from '@mui/system';
 import Link from 'next/link';
+
 
 
 function ModalBox({ open, handleClose }) {
